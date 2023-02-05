@@ -10,14 +10,14 @@ export const products: CrazyProduct[] = [
     type:'Vodka - Bebida blanca',
     title:'vodka Crazy',
     description:'Vodka ideal para el verano',
-    price:500,
+    price:600,
     url: '/vodka.png'
   },
   {
     id:1,
     type:'Rom - Bebida blanca',
     title:'rom Crazy',
-    price:550,
+    price:650,
     description:'Rom ideal prepararte los mejores tragos',
     url: '/rom-crazy.png'
   },
@@ -25,7 +25,7 @@ export const products: CrazyProduct[] = [
     id:2,
     type:'Tekila - Bebida blanca',
     title:'tekila Crazy',
-    price:550,
+    price:700,
     description:'Tekila ideal prepararte los mejores tragos',
     url: '/tekilaCrazy.png'
   },
@@ -33,7 +33,7 @@ export const products: CrazyProduct[] = [
     id:4,
     type:'Gin - Bebida blanca',
     title:'gin Crazy',
-    price:500,
+    price:600,
     description:'Gin ideal prepararte los mejores tragos',
     url: '/gin.jpg'
   },
@@ -41,7 +41,7 @@ export const products: CrazyProduct[] = [
     id:3,
     type:'Licores - Bebida blanca',
     title:'Tekila Crazy',
-    price:600,
+    price:700,
     description:'Licores con todos sus sabores',
     url: '/licores.jpg'
   },
@@ -49,7 +49,7 @@ export const products: CrazyProduct[] = [
     id:6,
     type:'Petakas - Bebida blanca',
     title:'petakas Crazy',
-    price:200,
+    price:210,
     description:'Infaltables en tu negocio',
     url: '/petakas.jpg'
   },
