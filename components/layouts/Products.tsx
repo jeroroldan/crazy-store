@@ -1,7 +1,6 @@
-import Image from 'next/image'
 import products from "@/data/products"
 import { Box } from '@mui/material';
-import ProductDetail from './ProductDetail';
+import ProductList from './ProductList';
 
 
 export const Products = () => {
@@ -11,7 +10,7 @@ export const Products = () => {
       <Box sx={{ display:'flex',alignItems:'center', alignContent:'center',flexWrap:'wrap', justifyContent:'center'}}>
         {
           products.map(product =>(
-            <ProductDetail key={product.id} product={ product } />
+            <ProductList key={product.id} product={ product } />
           ))
         }
       </Box>
