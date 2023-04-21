@@ -18,7 +18,11 @@ export default function Home() {
           <Typography variant='h2' sx={{ mb: 1 }}>Contacto: 341-6142211</Typography>
           
             <Products/>
-        <Typography variant='h2' sx={{ textTransform:'capitalize',marginTop:3 ,backgroundColor:'violet', width:'100%', textAlign:'center', padding:'15px' }}>PROHIBIDA LA VENTA A MENORES DE 18 años</Typography>
+        <Typography 
+          variant='h2' 
+          sx={{ textTransform:'capitalize',marginTop:3 ,backgroundColor:'violet', width:'100%', textAlign:'center', padding:'15px' }}
+        >
+          PROHIBIDA LA VENTA A MENORES DE 18 años</Typography>
         </Box>
       </ShopLayout>
     </>
