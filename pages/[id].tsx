@@ -6,7 +6,7 @@ import { ShopLayout } from '@/components/layouts';
 import products from "@/data/products"
 import Link from 'next/link';
 
-export const productDetail = () => {
+export const PageDetailProduct = () => {
 
   const { query } = useRouter();
 
@@ -28,4 +28,4 @@ export const productDetail = () => {
   )
 }
 
-export default productDetail
+export default PageDetailProduct
