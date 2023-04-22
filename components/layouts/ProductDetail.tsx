@@ -29,7 +29,7 @@ const ProductDetail:FC<Props> = ({product}) => {
               ?
               (
                 <Link href={ `${product.id}` } passHref legacyBehavior>  
-                  <Button variant="contained" style={{ marginBottom:'27px', padding:'1rem', marginTop:6 }} size="large" color='success'>
+                  <Button variant="contained" style={{ marginBottom:'27px', padding:'1rem', marginTop:8 }} size="large" color='success'>
                     <ArrowForwardIcon></ArrowForwardIcon>
                     Ver detalle...
                   </Button>
