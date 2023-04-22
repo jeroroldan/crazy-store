@@ -38,9 +38,13 @@ export const ShopLayout:FC<Props> = ({ children, title, pageDescription, imageFu
         </nav>
 
         <main style={{
-            margin: '80px auto',
+            margin: '16px auto',
             maxWidth: '1440px',
-            padding: '0px 30px'
+            padding: '0px 30px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems:'center'
         }}>
             { children }
         </main>

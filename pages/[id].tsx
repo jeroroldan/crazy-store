@@ -19,11 +19,11 @@ export const PageDetailProduct = () => {
   return (
     <ShopLayout title='productos categoria' pageDescription='licores crazy'>
       <Link  href="/" replace>
-        <Button variant="contained" color='info'>
+        <Button variant="contained"  size="large" color='success'>
           volver
         </Button>
       </Link>
-      <ProductDetail product={products[valueId|| 2]} />
+      <ProductDetail product={products[valueId|| 0]} />
     </ShopLayout>
   )
 }
