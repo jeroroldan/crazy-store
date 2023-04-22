@@ -9,12 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
       <ThemeProvider theme={lightTheme}>
         <CssBaseline />
-
-        
           <Component {...pageProps} />
-        
-      
-      
       </ThemeProvider>
     )
 }

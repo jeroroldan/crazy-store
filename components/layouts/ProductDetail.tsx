@@ -28,7 +28,7 @@ const ProductDetail:FC<Props> = ({product}) => {
               ?
               (
                 <Link href={ `${product.id}` } passHref legacyBehavior>  
-                  <Button variant="contained" style={{ marginBottom:'27px' }} size="large" color='success'>
+                  <Button variant="contained" style={{ marginBottom:'27px', padding:'1rem' }} size="large" color='success'>
                     Ver detalle...
                   </Button>
                 </Link>
@@ -36,7 +36,7 @@ const ProductDetail:FC<Props> = ({product}) => {
               :
               (null)
             }
-        <Typography variant='h2'>{ price.toLocaleString("es-AR",{ style: 'currency', currency:'ARS' }) }</Typography>
+        <Typography sx={{ fontWeight:700 }} variant='h2'>{ price.toLocaleString("es-AR",{ style: 'currency', currency:'ARS' }) }</Typography>
       </Box>
   )
 }

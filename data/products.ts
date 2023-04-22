@@ -51,7 +51,7 @@ export const products: CrazyProduct[] = [
     title:'Piña Colada',
     price:800,
     description:'Licores con todos sus sabores',
-    url: '/pinacolada.png'
+    url: '/pinacolada.PNG'
   },
   {
     id:6,
