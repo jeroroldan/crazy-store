@@ -1,12 +1,10 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import { ShopLayout } from '@/components/layouts'
 import { Box, Link, Typography } from '@mui/material';
 import { Products } from '@/components/layouts/Products'
 
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
