@@ -5,6 +5,7 @@ import ProductDetail from '@/components/layouts/ProductDetail'
 import { ShopLayout } from '@/components/layouts';
 import products from "@/data/products"
 import Link from 'next/link';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export const PageDetailProduct = () => {
 
@@ -20,6 +21,7 @@ export const PageDetailProduct = () => {
     <ShopLayout title='productos categoria' pageDescription='licores crazy'>
       <Link  href="/" replace>
         <Button variant="contained"  size="large" color='success'>
+          <ArrowBackIcon></ArrowBackIcon>
           volver
         </Button>
       </Link>
