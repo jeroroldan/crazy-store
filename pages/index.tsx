@@ -20,7 +20,7 @@ export default function Home() {
             <Products/>
         <Typography 
           variant='h2' 
-          sx={{ textTransform:'capitalize',marginTop:3 ,backgroundColor:'violet', width:'100%', textAlign:'center', padding:'15px' }}
+          sx={{ textTransform:'capitalize',marginTop:3 ,backgroundColor:'#8e64e7', width:'100%', textAlign:'center', padding:'15px' }}
         >
           PROHIBIDA LA VENTA A MENORES DE 18 años</Typography>
         </Box>
