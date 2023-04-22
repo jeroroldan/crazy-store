@@ -7,6 +7,8 @@ import { useRouter } from 'next/router';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Tooltip from '@mui/material/Tooltip';
 
+
+
 interface Props{
   product: CrazyProduct
 }
