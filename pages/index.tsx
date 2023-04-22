@@ -13,7 +13,11 @@ export default function Home() {
   return (
     <>
       <ShopLayout title={''} pageDescription={''}>
-        <Box sx={{ display:'flex', flexDirection:'column', alignItems:'center',justifyContent:'center' }}>
+        <Box sx={{ display:'flex', 
+                  flexDirection:'column',
+                  alignItems:'center',
+                  justifyContent:'center',
+                }}>
           <Box display={'flex'} justifyContent={'center'}>
             <LocalBarIcon fontSize='large'></LocalBarIcon>
             <Typography variant='h1' component='h1'>Cátalogo licores Crazy</Typography>
