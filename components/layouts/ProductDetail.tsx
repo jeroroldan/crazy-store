@@ -5,7 +5,7 @@ import { CrazyProduct } from '@/models';
 import Link  from 'next/link';
 import { useRouter } from 'next/router';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-
+import Tooltip from '@mui/material/Tooltip';
 
 interface Props{
   product: CrazyProduct
@@ -16,7 +16,6 @@ const ProductDetail:FC<Props> = ({product}) => {
   const { description,id,title,type,url,price } = product;
 
   const { asPath } = useRouter();
-
 
   return (
     
@@ -42,10 +41,17 @@ const ProductDetail:FC<Props> = ({product}) => {
               ?
               (
                 <Link href={ `${product.id}` } passHref legacyBehavior>  
-                  <Button variant="contained" style={{ marginBottom:'27px', padding:'1rem', marginTop:8 }} size="large" color='success'>
-                    <ArrowForwardIcon></ArrowForwardIcon>
-                    Ver detalle...
-                  </Button>
+                  <Tooltip title="Ir a página de detalle">
+                    <Button 
+                      variant="contained" 
+                      style={{ marginBottom:'27px', padding:'1rem', marginTop:8 }} 
+                      size="large" 
+                      color='success'
+                    >
+                        <ArrowForwardIcon></ArrowForwardIcon>
+                      Ver detalle...
+                    </Button>
+                  </Tooltip>
                 </Link>
               )
               :
