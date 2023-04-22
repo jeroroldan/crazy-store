@@ -25,6 +25,7 @@ export default function Home() {
           PROHIBIDA LA VENTA A MENORES DE 18 años</Typography>
         </Box>
       </ShopLayout>
+      {/* hola mundo */}
     </>
   )
 }
