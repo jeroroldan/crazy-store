@@ -28,32 +28,39 @@ export const PageDetailProduct = () => {
       </Link>
       <ProductDetail product={products[valueId|| 0]} />
 
-      <Grid container style={{ display:'flex' , flexDirection:'column' }}>
-        <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
-          <DoneIcon color='info'></DoneIcon>
-          <Typography>Mejor precio del mercado</Typography>
+      <Box border={0.5} borderRadius={'5px'} padding={2} bgcolor={'#eaeaea'} width={'100%'}>
+        <Grid container style={{ display:'flex' , flexDirection:'column' }}>
+          <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
+            <DoneIcon color='info'></DoneIcon>
+            <Typography fontWeight={500}>Mejor precio del mercado</Typography>
+          </Grid>
+          <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
+            <DoneIcon color='info'></DoneIcon>
+            <Typography fontWeight={500}>Alto margen de ganacia</Typography>
+          </Grid>
+          <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
+            <DoneIcon color='info'></DoneIcon>
+            <Typography fontWeight={500}>Vencimento prolongado</Typography>
+          </Grid>
+          <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
+            <DoneIcon color='info'></DoneIcon>
+            <Typography fontWeight={500}>Productos demandados</Typography>
+          </Grid>
+          <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
+            <DoneIcon color='info'></DoneIcon>
+            <Typography fontWeight={500}>Calidad superior</Typography>
+          </Grid>
+          <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
+            <DoneIcon color='info'></DoneIcon>
+            <Typography fontWeight={500}>Alta rotación</Typography>
+          </Grid>
+          <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
+            <DoneIcon color='info'></DoneIcon>
+            <Typography fontWeight={500}>Producto en temporada</Typography>
+          </Grid>
         </Grid>
-        <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
-          <DoneIcon color='info'></DoneIcon>
-          <Typography>Alto margen de ganacia</Typography>
-        </Grid>
-        <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
-          <DoneIcon color='info'></DoneIcon>
-          <Typography>Vencimento prolongado</Typography>
-        </Grid>
-        <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
-          <DoneIcon color='info'></DoneIcon>
-          <Typography>Productos demandados</Typography>
-        </Grid>
-        <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
-          <DoneIcon color='info'></DoneIcon>
-          <Typography>Calidad superior</Typography>
-        </Grid>
-        <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
-          <DoneIcon color='info'></DoneIcon>
-          <Typography>Alta rotación</Typography>
-        </Grid>
-      </Grid>
+      </Box>
+
 
     </ShopLayout>
   )

@@ -9,7 +9,7 @@ export const products: CrazyProduct[] = [
     id:0,
     type:'Vodka - Bebida blanca',
     title:'vodka Crazy',
-    description:'Vodka ideal para el verano',
+    description:'Vodka ideal para el invierno',
     price:660,
     url: '/vodka.png'
   },

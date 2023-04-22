@@ -20,7 +20,7 @@ const ProductDetail:FC<Props> = ({product}) => {
 
   return (
     
-      <Box sx={{ display:'flex', flexDirection:'column', alignItems:'center', border:'1px solid', margin:'15px',textTransform:'capitalize' ,padding:'15px', borderRadius:5}}>
+      <Box sx={{ display:'flex', flexDirection:'column',boxShadow:'15px 5px 10px #48529944' ,alignItems:'center', border:'1px solid', margin:'15px',textTransform:'capitalize' ,padding:'15px', borderRadius:5}}>
         <Typography variant='h3'>{ title }</Typography>
         <Typography variant='subtitle2'>{ description }</Typography>
         <Image src={url} width={355} height={355} alt={title}  />
