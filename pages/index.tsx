@@ -83,9 +83,15 @@ export default function Home() {
             </Grid>
           </Grid>
           <Button variant="contained" onClick={handleOpen} color='info' sx={{ padding:2, width:'80%', mt:2 }}>
+            <VisibilityIcon></VisibilityIcon>
             Ver Ofertas!!
           </Button>
+
+
           <Products/>
+
+
+
         <Typography 
           variant='h2' 
           sx={{ textTransform:'capitalize',marginTop:3 ,backgroundColor:'#8e64e7', width:'100%', textAlign:'center', padding:'15px' }}
@@ -111,7 +117,6 @@ export default function Home() {
               OFERTA VIGENTE
             </Typography>
             <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-              <VisibilityIcon></VisibilityIcon>
               <Typography id="transition-modal-description" sx={{ mt: 2 }}>
                 Comprando 5 cajas pueden ser surtidas de cada variedad se aplica un 10% al total de la compra.
               </Typography>
