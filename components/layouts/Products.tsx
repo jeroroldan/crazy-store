@@ -3,9 +3,7 @@ import { Box } from '@mui/material';
 import ProductList from './ProductList';
 import { FC } from "react";
 
-interface Props {
-  hasBeenSeen: boolean;
-}
+
 
 export const Products = () => {
 

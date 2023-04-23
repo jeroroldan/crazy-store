@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import Image from 'next/image'
 import { Box, Typography, Button } from '@mui/material';
 import { CrazyProduct } from '@/models';
@@ -6,6 +6,7 @@ import Link  from 'next/link';
 import { useRouter } from 'next/router';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Tooltip from '@mui/material/Tooltip';
+import { OfferContext } from '@/context/offerContext';
 
 
 
@@ -15,9 +16,17 @@ interface Props{
 
 const ProductDetail:FC<Props> = ({product}) => {
 
+  const { showState,hasBeenSeen } = useContext(OfferContext);
+
   const { description,id,title,type,url,price } = product;
 
   const { asPath } = useRouter();
+
+
+  const handleChangeState = () => {
+    
+    showState(true)
+  }
 
   return (
     
@@ -42,7 +51,7 @@ const ProductDetail:FC<Props> = ({product}) => {
               asPath === '/'
               ?
               (
-                <Link href={ `${product.id}` } passHref legacyBehavior>  
+                <Link href={ {pathname:`${product.id}` } } passHref legacyBehavior>  
                   <Tooltip title="Ir a página de detalle">
                     <Button 
                       variant="contained" 

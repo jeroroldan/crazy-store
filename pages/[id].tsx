@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React from 'react'
+import React, { useContext } from 'react'
 import { Box, Button, Grid, Typography } from '@mui/material';
 import ProductDetail from '@/components/layouts/ProductDetail'
 import { ShopLayout } from '@/components/layouts';
@@ -7,21 +7,33 @@ import products from "@/data/products"
 import Link from 'next/link';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DoneIcon from '@mui/icons-material/Done';
+import { OfferContext } from '@/context/offerContext';
 
 export const PageDetailProduct = () => {
 
   const { query } = useRouter();
 
+  const { showState } = useContext(OfferContext);
+
   let parseQuery = query.id as string;
 
-  let valueId = parseInt(parseQuery)
+  let valueId = parseInt(parseQuery);
+
+  const handleChangeButton = () => {
+    showState(true)
+  }
   
 
 
   return (
     <ShopLayout title='productos categoria' pageDescription='licores crazy'>
       <Link  href="/" replace>
-        <Button variant="contained"  size="large" color='success'>
+        <Button 
+          variant="contained"  
+          size="large" 
+          color='success'
+          onClick={ handleChangeButton }
+        >
           <ArrowBackIcon></ArrowBackIcon>
           volver
         </Button>

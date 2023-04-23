@@ -10,8 +10,9 @@ import LocalBarIcon from '@mui/icons-material/LocalBar';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import Modal from '@mui/material/Modal';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { OfferContext } from '@/context/offerContext';
 
   const style = {
     position: 'absolute' as 'absolute',
@@ -28,13 +29,15 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 export default function Home() {
 
   const [open, setOpen] = useState(false);
-  const [ hasBeenSeen , setHasBeenSeen ] = useState(false);
+  const { showState,hasBeenSeen } = useContext( OfferContext )
+
   const handleOpen = () => {
     setOpen(true);
-    setHasBeenSeen(true)
+    showState(true)
   }
-  const handleClose = () => setOpen(false);
-
+  const handleClose = () => {
+    setOpen(false);
+  }
 
 
 
