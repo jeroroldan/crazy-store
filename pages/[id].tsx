@@ -7,21 +7,16 @@ import products from "@/data/products"
 import Link from 'next/link';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DoneIcon from '@mui/icons-material/Done';
-import { OfferContext } from '@/context/offerContext';
 
 export const PageDetailProduct = () => {
 
   const { query } = useRouter();
 
-  const { showState } = useContext(OfferContext);
-
   let parseQuery = query.id as string;
 
   let valueId = parseInt(parseQuery);
 
-  const handleChangeButton = () => {
-    showState(true)
-  }
+
   
 
 
@@ -32,7 +27,6 @@ export const PageDetailProduct = () => {
           variant="contained"  
           size="large" 
           color='success'
-          onClick={ handleChangeButton }
         >
           <ArrowBackIcon></ArrowBackIcon>
           volver
