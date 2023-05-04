@@ -75,7 +75,7 @@ export const products: CrazyProduct[] = [
     title:'petakas  Cremosas',
     price:300,
     description:'Infaltables en tu negocio',
-    url: '/petakas.jpg'
+    url: '/petakasPesadas.jpg'
   },
   
 
