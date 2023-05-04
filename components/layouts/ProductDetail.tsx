@@ -68,7 +68,7 @@ const ProductDetail:FC<Props> = ({product}) => {
               :
               (null)
             }
-        <Typography sx={{ fontWeight:700 }} variant='h2'>{ price.toLocaleString("es-AR",{ style: 'currency', currency:'ARS' }) }</Typography>
+        <Typography sx={{ fontWeight:700, fontSize:'2rem' }}>{ price.toLocaleString("es-AR",{ style: 'currency', currency:'ARS' }) }</Typography>
       </Box>
   )
 }
