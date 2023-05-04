@@ -10,14 +10,14 @@ export const products: CrazyProduct[] = [
     type:'Vodka - Bebida blanca',
     title:'vodka Crazy',
     description:'Vodka ideal para el invierno',
-    price:660,
+    price:750,
     url: '/vodka.png'
   },
   {
     id:1,
     type:'Rom - Bebida blanca',
     title:'rom Crazy',
-    price:720,
+    price:820,
     description:'Rom ideal prepararte los mejores tragos',
     url: '/rom-crazy.png'
   },
@@ -25,7 +25,7 @@ export const products: CrazyProduct[] = [
     id:2,
     type:'Tekila - Bebida blanca',
     title:'tekila Crazy',
-    price:720,
+    price:820,
     description:'Tekila ideal prepararte los mejores tragos',
     url: '/tekilaCrazy.png'
   },
@@ -33,7 +33,7 @@ export const products: CrazyProduct[] = [
     id:3,
     type:'Gin - Bebida blanca',
     title:'gin Crazy',
-    price:660,
+    price:820,
     description:'Gin ideal prepararte los mejores tragos',
     url: '/gin.jpg'
   },
@@ -41,7 +41,7 @@ export const products: CrazyProduct[] = [
     id:4,
     type:'Licores ',
     title:'Licores',
-    price:700,
+    price:800,
     description:'Licores con todos sus sabores',
     url: '/licores.jpg'
   },
@@ -49,7 +49,7 @@ export const products: CrazyProduct[] = [
     id:5,
     type:'Licores ',
     title:'Piña Colada',
-    price:800,
+    price:950,
     description:'Licores con todos sus sabores',
     url: '/pinacolada.PNG'
   },
@@ -57,7 +57,7 @@ export const products: CrazyProduct[] = [
     id:6,
     type:'Licores ',
     title:'Granadina',
-    price:745,
+    price:975,
     description:'Licores con todos sus sabores',
     url: '/licores.jpg'
   },
@@ -65,7 +65,7 @@ export const products: CrazyProduct[] = [
     id:7,
     type:'Petakas - Bebida blanca',
     title:'petakas Crazy',
-    price:230,
+    price:270,
     description:'Infaltables en tu negocio',
     url: '/petakas.jpg'
   },
@@ -73,7 +73,7 @@ export const products: CrazyProduct[] = [
     id:8,
     type:'Petakas - Bebida cremosa',
     title:'petakas  Cremosas',
-    price:260,
+    price:300,
     description:'Infaltables en tu negocio',
     url: '/petakas.jpg'
   },
