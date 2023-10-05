@@ -38,6 +38,14 @@ export const products: CrazyProduct[] = [
   },
   {
     id: 4,
+    type: "Cocktails",
+    title: "Frut., Ana.,Dur. x750.",
+    price: 885,
+    description: "Cocktails con vodka superior caja x 6 uni.",
+    url: "/cocktail.jpg",
+  },
+  {
+    id: 5,
     type: "Licores ",
     title: "Licores x1L.",
     price: 1075,
@@ -45,7 +53,7 @@ export const products: CrazyProduct[] = [
     url: "/licores.jpg",
   },
   {
-    id: 5,
+    id: 6,
     type: "Licores ",
     title: "Piña Colada x1L.",
     price: 1220,
@@ -53,7 +61,7 @@ export const products: CrazyProduct[] = [
     url: "/pinacolada.PNG",
   },
   {
-    id: 6,
+    id: 7,
     type: "Licores ",
     title: "Granadina",
     price: 1180,
@@ -61,7 +69,7 @@ export const products: CrazyProduct[] = [
     url: "/licores.jpg",
   },
   {
-    id: 7,
+    id: 8,
     type: "Petakas - Bebida blanca",
     title: "petakas Crazy",
     price: 355,
@@ -69,7 +77,7 @@ export const products: CrazyProduct[] = [
     url: "/petakaBlanca.jpg",
   },
   {
-    id: 8,
+    id: 9,
     type: "Petakas - Bebida cremosa",
     title: "petakas  Cremosas",
     price: 398,
