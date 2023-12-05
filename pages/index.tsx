@@ -43,7 +43,7 @@ export default function Home() {
 
   return (
     <>
-      <ShopLayout title={''} pageDescription={''}>
+      <ShopLayout title={'licores crazy'} pageDescription={'licores crazy'}>
         {
           !hasBeenSeen
           ?
@@ -69,7 +69,7 @@ export default function Home() {
                 }}>
           <Box display={'flex'} justifyContent={'center'}>
             <LocalBarIcon fontSize='large'></LocalBarIcon>
-            <Typography variant='h1' component='h1'>Cátalogo Licores Crazy</Typography>
+            <Typography variant='h1' component='h1'>Licores Crazy</Typography>
           </Box>
           <Grid container display={'flex'} flexDirection={'column'}>
             <Grid item>
