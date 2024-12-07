@@ -160,7 +160,7 @@ const ProductDetail: FC<Props> = ({ product }) => {
               },
             }}
           >
-            Agregar al carrito
+            Hacer Pédido por Whatsapp al número que figura al inicio
           </Button>
         )}
         <Box>
