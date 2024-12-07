@@ -33,7 +33,6 @@ export const ShopLayout: FC<LayoutProps> = ({
       <Container component="main" sx={mainStyles}>
         {children}
       </Container>
-
     </>
   );
 };

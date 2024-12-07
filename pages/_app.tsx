@@ -1,18 +1,29 @@
-import { ThemeProvider } from '@emotion/react'
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import { lightTheme } from '@/themes'
-import { CssBaseline } from '@mui/material'
-import { OfferProvider } from '@/context/offerContext'
+import type { AppProps } from "next/app";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { createTheme } from "@mui/material/styles";
 
-export default function App({ Component, pageProps }: AppProps) {
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#1976d2",
+    },
+    secondary: {
+      main: "#dc004e",
+    },
+    background: {
+      default: "#f4f6f8",
+    },
+  },
+});
 
-    return (
-      <OfferProvider>
-        <ThemeProvider theme={lightTheme}>
-          <CssBaseline />
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </OfferProvider>
-    )
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
 }
+
+export default MyApp;
