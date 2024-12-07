@@ -1,75 +1,69 @@
-import { useRouter } from 'next/router';
-import React, { useContext } from 'react'
-import { Box, Button, Grid, Typography } from '@mui/material';
-import ProductDetail from '@/components/layouts/ProductDetail'
-import { ShopLayout } from '@/components/layouts';
-import products from "@/data/products"
-import Link from 'next/link';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import DoneIcon from '@mui/icons-material/Done';
+import { useRouter } from "next/router";
+import React, { useMemo } from "react";
+import { Box, Button, Grid, Typography } from "@mui/material";
+import ProductDetail from "@/components/layouts/ProductDetail";
+import { ShopLayout } from "@/components/layouts";
+import products from "@/data/products";
+import Link from "next/link";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import DoneIcon from "@mui/icons-material/Done";
 
-export const PageDetailProduct = () => {
-
+const PageDetailProduct = () => {
   const { query } = useRouter();
-
-  let parseQuery = query.id as string;
-
-  let valueId = parseInt(parseQuery);
-
-
-  
-
+  const valueId = useMemo(() => parseInt(query.id as string) || 0, [query.id]);
 
   return (
-    <ShopLayout title='productos categoria' pageDescription='licores crazy'>
-      <Link  href="/" replace>
-        <Button 
-          variant="contained"  
-          size="large" 
-          color='success'
-        >
-          <ArrowBackIcon></ArrowBackIcon>
-          volver
-        </Button>
-      </Link>
-      <ProductDetail product={products[valueId|| 0]} />
+    <ShopLayout title="Productos Categoría" description="Licores Crazy">
+      <Box display="flex" justifyContent="space-between" mb={2}>
+        <Link href="/" replace>
+          <Button
+            variant="contained"
+            size="large"
+            color="success"
+            sx={{ width: "200px" }}
+          >
+            <ArrowBackIcon />
+            Volver
+          </Button>
+        </Link>
+      </Box>
+      <ProductDetail product={products[valueId]} />
 
-      <Box border={0.5} borderRadius={'5px'} padding={2} bgcolor={'#eaeaea'} width={'100%'}>
-        <Grid container style={{ display:'flex' , flexDirection:'column' }}>
-          <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
-            <DoneIcon color='info'></DoneIcon>
-            <Typography fontWeight={500}>Mejor precio del mercado</Typography>
-          </Grid>
-          <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
-            <DoneIcon color='info'></DoneIcon>
-            <Typography fontWeight={500}>Alto margen de ganacia</Typography>
-          </Grid>
-          <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
-            <DoneIcon color='info'></DoneIcon>
-            <Typography fontWeight={500}>Vencimento prolongado</Typography>
-          </Grid>
-          <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
-            <DoneIcon color='info'></DoneIcon>
-            <Typography fontWeight={500}>Productos demandados</Typography>
-          </Grid>
-          <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
-            <DoneIcon color='info'></DoneIcon>
-            <Typography fontWeight={500}>Calidad superior</Typography>
-          </Grid>
-          <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
-            <DoneIcon color='info'></DoneIcon>
-            <Typography fontWeight={500}>Alta rotación</Typography>
-          </Grid>
-          <Grid item style={{ display: 'flex' , justifyContent:'center', margin:'auto' }}>
-            <DoneIcon color='info'></DoneIcon>
-            <Typography fontWeight={500}>Producto en temporada</Typography>
-          </Grid>
+      <Box
+        border={0.5}
+        borderRadius="5px"
+        padding={2}
+        bgcolor="#eaeaea"
+        width="100%"
+        mt={2}
+      >
+        <Grid container direction="column" alignItems="center" spacing={1}>
+          {[
+            "Mejor precio del mercado",
+            "Alto margen de ganancia",
+            "Vencimiento prolongado",
+            "Productos demandados",
+            "Calidad superior",
+            "Alta rotación",
+            "Producto en temporada",
+          ].map((text, index) => (
+            <Grid
+              item
+              key={index}
+              container
+              justifyContent="center"
+              alignItems="center"
+            >
+              <DoneIcon color="info" />
+              <Typography fontWeight={500} ml={1}>
+                {text}
+              </Typography>
+            </Grid>
+          ))}
         </Grid>
       </Box>
-
-
     </ShopLayout>
-  )
-}
+  );
+};
 
-export default PageDetailProduct
+export default PageDetailProduct;
