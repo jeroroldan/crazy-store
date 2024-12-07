@@ -48,7 +48,7 @@ export default function Home() {
 
   return (
     <ShopLayout title="Licores Crazy" description="Licores Crazy">
-      {!hasBeenSeen && (
+      {!hasBeenSeen ? (
         <Stack sx={{ width: "100%", justifyContent: "center" }} spacing={2}>
           <Alert
             variant="filled"
@@ -63,7 +63,7 @@ export default function Home() {
             Tienes ofertas sin mirar!!!!
           </Alert>
         </Stack>
-      )}
+      ) : <></>}
 
       <Box
         sx={{
@@ -116,8 +116,8 @@ export default function Home() {
           sx={{
             textTransform: "capitalize",
             marginTop: 3,
-            color:'#ffff',
-            borderRadius:3,
+            color: "#ffff",
+            borderRadius: 3,
             backgroundColor: "#8e64e7",
             width: "100%",
             textAlign: "center",
