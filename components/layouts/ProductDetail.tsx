@@ -16,7 +16,7 @@ import { CrazyProduct } from "@/models";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import WhatsappIcon from "@mui/icons-material/WhatsApp";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { OfferContext } from "@/context/offerContext";
@@ -49,7 +49,8 @@ const ProductDetail: FC<Props> = ({ product }) => {
       elevation={3}
       sx={{
         display: "flex",
-        marginBottom:2,
+        marginBottom: 2,
+        marginTop:2,
         flexDirection: "column",
         height: "100%",
         transition: "all 0.3s ease-in-out",
@@ -57,6 +58,7 @@ const ProductDetail: FC<Props> = ({ product }) => {
           transform: "translateY(-8px)",
           boxShadow: (theme) => theme.shadows[10],
         },
+        minWidth: "100%",
         borderRadius: 2,
         overflow: "hidden",
         backgroundColor: "#ffffff",
@@ -88,7 +90,7 @@ const ProductDetail: FC<Props> = ({ product }) => {
             position: "absolute",
             top: 16,
             right: 16,
-            fontSize: "1rem",
+            fontSize: "1.3rem",
             fontWeight: "bold",
             backgroundColor: "rgba(25, 118, 210, 0.9)",
             color: "white",
@@ -139,7 +141,7 @@ const ProductDetail: FC<Props> = ({ product }) => {
                   borderColor: "#1976d2",
                   color: "#1976d2",
                   "&:hover": {
-                    backgroundColor: "rgba(25, 118, 210, 0.04)",
+                    backgroundColor: "#2571DB",
                   },
                 }}
               >
@@ -150,7 +152,7 @@ const ProductDetail: FC<Props> = ({ product }) => {
         ) : (
           <Button
             variant="contained"
-            startIcon={<ShoppingCartIcon />}
+            startIcon={<WhatsappIcon />}
             size="medium"
             onClick={handleChangeState}
             sx={{
@@ -163,35 +165,6 @@ const ProductDetail: FC<Props> = ({ product }) => {
             Hacer Pédido por Whatsapp al número que figura al inicio
           </Button>
         )}
-        <Box>
-          <Tooltip
-            title={isFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}
-          >
-            <IconButton
-              onClick={handleFavoriteClick}
-              sx={{
-                color: isFavorite ? "red" : "grey.500",
-              }}
-            >
-              <FavoriteIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip
-            title={
-              expanded ? "Ocultar descripción" : "Ver descripción completa"
-            }
-          >
-            <IconButton
-              onClick={handleExpandClick}
-              sx={{
-                transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
-                transition: "transform 0.3s",
-              }}
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </Tooltip>
-        </Box>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>

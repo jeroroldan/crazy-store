@@ -74,8 +74,7 @@ export default function Home() {
         }}
       >
         <Box display="flex" justifyContent="center" alignItems="center" mb={3}>
-          <LocalBarIcon fontSize="large" />
-          <Typography variant="h1" component="h1" ml={1}>
+          <Typography variant="h1" style={{ textAlign:'center' }} component="h1" ml={1}>
             Licores Crazy
           </Typography>
         </Box>
