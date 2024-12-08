@@ -13,7 +13,6 @@ import {
 import { Products } from "@/components/layouts/Products";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import LocalBarIcon from "@mui/icons-material/LocalBar";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useContext, useState } from "react";
 import { OfferContext } from "@/context/offerContext";
@@ -46,7 +45,7 @@ export default function Home() {
   return (
     <ShopLayout
       title="Licores y bebidas vodka gin rom  Crazy"
-      description="Licores Crazy"
+      description="Licores bebidas Crazy"
     >
       {!hasBeenSeen ? (
         <Stack sx={{ width: "100%", justifyContent: "center" }} spacing={2}>
@@ -87,7 +86,7 @@ export default function Home() {
             component="h1"
             ml={1}
           >
-            Venta de
+            Venta y
             <br />
             Distribución de Bebidas.
           </Typography>
