@@ -9,7 +9,6 @@ import {
   CardActions,
   Chip,
   Tooltip,
-  IconButton,
   Collapse,
 } from "@mui/material";
 import { CrazyProduct } from "@/models";
@@ -17,8 +16,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import WhatsappIcon from "@mui/icons-material/WhatsApp";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { OfferContext } from "@/context/offerContext";
 
 interface Props {
@@ -30,19 +27,14 @@ const ProductDetail: FC<Props> = ({ product }) => {
   const { description, id, title, url, price } = product;
   const { asPath } = useRouter();
   const [expanded, setExpanded] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   const handleChangeState = () => {
     showState(true);
   };
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
-  const handleFavoriteClick = () => {
-    setIsFavorite(!isFavorite);
-  };
+
+
 
   return (
     <Card

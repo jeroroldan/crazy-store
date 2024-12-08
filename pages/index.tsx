@@ -1,6 +1,3 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "@/styles/Home.module.css";
 import { ShopLayout } from "@/components/layouts";
 import {
   Backdrop,
@@ -47,7 +44,10 @@ export default function Home() {
   };
 
   return (
-    <ShopLayout title="Licores Crazy" description="Licores Crazy">
+    <ShopLayout
+      title="Licores y bebidas vodka gin rom  Crazy"
+      description="Licores Crazy"
+    >
       {!hasBeenSeen ? (
         <Stack sx={{ width: "100%", justifyContent: "center" }} spacing={2}>
           <Alert
@@ -63,7 +63,9 @@ export default function Home() {
             Tienes ofertas sin mirar!!!!
           </Alert>
         </Stack>
-      ) : <></>}
+      ) : (
+        <></>
+      )}
 
       <Box
         sx={{
@@ -74,8 +76,20 @@ export default function Home() {
         }}
       >
         <Box display="flex" justifyContent="center" alignItems="center" mb={3}>
-          <Typography variant="h1" style={{ textAlign:'center' }} component="h1" ml={1}>
-            Licores Crazy
+          <Typography
+            variant="h1"
+            style={{
+              fontSize:75,
+              textAlign: "center",
+              lineHeight: "1.2",
+              fontWeight: "bold",
+            }}
+            component="h1"
+            ml={1}
+          >
+            Venta de
+            <br />
+            Distribución de Bebidas.
           </Typography>
         </Box>
 
