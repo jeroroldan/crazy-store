@@ -86,9 +86,7 @@ export default function Home() {
             component="h1"
             ml={1}
           >
-            Venta y
-            <br />
-            Distribución de Bebidas.
+            Distribución de Bebidas alchólicas.
           </Typography>
         </Box>
 

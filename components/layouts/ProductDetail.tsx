@@ -42,7 +42,7 @@ const ProductDetail: FC<Props> = ({ product }) => {
       sx={{
         display: "flex",
         marginBottom: 2,
-        marginTop:2,
+        marginTop: 2,
         flexDirection: "column",
         height: "100%",
         transition: "all 0.3s ease-in-out",
@@ -131,9 +131,11 @@ const ProductDetail: FC<Props> = ({ product }) => {
                 size="medium"
                 sx={{
                   borderColor: "#1976d2",
-                  color: "#1976d2",
+                  color: "#1976d2", // Color del texto en estado normal
                   "&:hover": {
                     backgroundColor: "#2571DB",
+                    color: "#FFFFFF", // Color del texto en hover
+                    borderColor: "#2571DB", // Color del borde en hover
                   },
                 }}
               >
@@ -146,7 +148,7 @@ const ProductDetail: FC<Props> = ({ product }) => {
             variant="contained"
             startIcon={<WhatsappIcon />}
             size="medium"
-            onClick={handleChangeState}
+            // onClick={handleChangeState}
             sx={{
               backgroundColor: "#1976d2",
               "&:hover": {

@@ -7,13 +7,14 @@ import products from "@/data/products";
 import Link from "next/link";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DoneIcon from "@mui/icons-material/Done";
+import { color } from "framer-motion";
 
 const PageDetailProduct = () => {
   const { query } = useRouter();
   const valueId = useMemo(() => parseInt(query.id as string) || 0, [query.id]);
 
   return (
-    <ShopLayout title="Productos Categoría" description="Licores Crazy">
+    <ShopLayout  title="Productos Categoría" description="Licores Crazy">
       <Box display="flex" justifyContent="space-between" mb={2}>
         <Link href="/" replace>
           <Button
