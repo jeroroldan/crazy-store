@@ -5,7 +5,7 @@ export const products: CrazyProduct[] = [
   {
     id: 0,
     type: "Vodka - Bebida blanca",
-    title: "vodka Crazy x1L.",
+    title: "Vodka Crazy x1L.",
     description: "Vodka de Calidad superior caja x 6 uni.",
     price: 3150,
     url: "/vodka.png",
@@ -13,7 +13,7 @@ export const products: CrazyProduct[] = [
   {
     id: 1,
     type: "Rom - Bebida blanca",
-    title: "rom Crazy x1L.",
+    title: "Rom Crazy x1L.",
     price: 3450,
     description: "Rom de Calidad superior caja x 6 uni.",
     url: "/rom-crazy.png",
@@ -21,7 +21,7 @@ export const products: CrazyProduct[] = [
   {
     id: 2,
     type: "Tekila - Bebida blanca",
-    title: "tekila Crazy x1L.",
+    title: "Tekila Crazy x1L.",
     price: 3450,
     description: "Tekila de Calidad superior caja x 6 uni.",
     url: "/tekilaCrazy.png",
@@ -29,7 +29,7 @@ export const products: CrazyProduct[] = [
   {
     id: 3,
     type: "Gin - Bebida blanca",
-    title: "gin Crazy x1L.",
+    title: "Gin Crazy x1L.",
     price: 3450,
     description: "Gin de Calidad superior caja x 6 uni.",
     url: "/gin.jpg",
@@ -69,7 +69,7 @@ export const products: CrazyProduct[] = [
   {
     id: 8,
     type: "Petakas - Bebida blanca",
-    title: "petakas Crazy",
+    title: "Petakas Crazy",
     price: 1056,
     description: "Infaltables en tu negocio",
     url: "/petakaBlanca.jpg",
@@ -77,7 +77,7 @@ export const products: CrazyProduct[] = [
   {
     id: 9,
     type: "Petakas - Bebida cremosa",
-    title: "petakas  Cremosas",
+    title: "Petakas  Cremosas",
     price: 1185,
     description: "Infaltables en tu negocio",
     url: "/petakasPesadas.jpg",
