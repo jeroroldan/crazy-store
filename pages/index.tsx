@@ -61,7 +61,7 @@ export default function Home() {
           <Typography
             variant="h1"
             style={{
-              fontSize: 75,
+              fontSize: 65,
               textAlign: "center",
               lineHeight: "1.2",
               fontWeight: "bold",
