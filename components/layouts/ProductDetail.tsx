@@ -32,10 +32,6 @@ const ProductDetail: FC<Props> = ({ product }) => {
     showState(true);
   };
 
-
-
-
-
   return (
     <Card
       elevation={3}
@@ -60,7 +56,7 @@ const ProductDetail: FC<Props> = ({ product }) => {
         sx={{
           position: "relative",
           width: "100%",
-          paddingTop: "100%",
+          paddingTop: "75%", // Reducido de 100% a 75% para hacer la imagen más pequeña
           overflow: "hidden",
         }}
       >
@@ -69,44 +65,53 @@ const ProductDetail: FC<Props> = ({ product }) => {
           alt={title}
           layout="fill"
           objectFit="contain"
-          priority
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-        <Chip
-          label={price.toLocaleString("es-AR", {
-            style: "currency",
-            currency: "ARS",
-          })}
-          color="primary"
-          sx={{
-            position: "absolute",
-            top: 16,
-            right: 16,
-            fontSize: "1.3rem",
-            fontWeight: "bold",
-            backgroundColor: "rgba(25, 118, 210, 0.9)",
-            color: "white",
-            backdropFilter: "blur(4px)",
-          }}
+          loading="lazy" // Carga perezosa en lugar de priority
+          sizes="(max-width: 568px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </Box>
       <CardContent sx={{ flexGrow: 1, padding: 2 }}>
-        <Typography
-          variant="h6"
-          component="h2"
-          gutterBottom
+        <Box
           sx={{
-            color: "#333",
-            fontWeight: "bold",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            mb: 1,
           }}
         >
-          {title}
-        </Typography>
+          <Typography
+            variant="h6"
+            component="h2"
+            sx={{
+              color: "#333",
+              fontWeight: "bold",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "-webkit-box",
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: "vertical",
+              mr: 1,
+              flex: 1,
+            }}
+          >
+            {title}
+          </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              color: "#1976d2",
+              fontWeight: "bold",
+              whiteSpace: "nowrap",
+              backgroundColor: "rgba(25, 118, 210, 0.1)",
+              padding: "4px 8px",
+              borderRadius: "4px",
+            }}
+          >
+            {price.toLocaleString("es-AR", {
+              style: "currency",
+              currency: "ARS",
+            })}
+          </Typography>
+        </Box>
         <Typography
           variant="body2"
           color="text.secondary"
@@ -116,6 +121,7 @@ const ProductDetail: FC<Props> = ({ product }) => {
             display: "-webkit-box",
             WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
+            mt: 1,
           }}
         >
           {description}
@@ -131,11 +137,11 @@ const ProductDetail: FC<Props> = ({ product }) => {
                 size="medium"
                 sx={{
                   borderColor: "#1976d2",
-                  color: "#1976d2", // Color del texto en estado normal
+                  color: "#1976d2",
                   "&:hover": {
                     backgroundColor: "#2571DB",
-                    color: "#FFFFFF", // Color del texto en hover
-                    borderColor: "#2571DB", // Color del borde en hover
+                    color: "#FFFFFF",
+                    borderColor: "#2571DB",
                   },
                 }}
               >
