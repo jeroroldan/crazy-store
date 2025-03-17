@@ -77,7 +77,7 @@ export default function Home() {
             <Box display="flex" justifyContent="center" alignItems="center">
               <WhatsAppIcon fontSize="large" color="success" />
               <Typography variant="h5" sx={{ ml: 1, my: 0 }}>
-                Contacto: 341-6142211
+                Hace tú pedido: 341-6142211
               </Typography>
             </Box>
           </Grid>
