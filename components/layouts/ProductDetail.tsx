@@ -46,17 +46,17 @@ const ProductDetail: FC<Props> = ({ product }) => {
           transform: "translateY(-8px)",
           boxShadow: (theme) => theme.shadows[10],
         },
-        minWidth: "100%",
+        minWidth: "80%",
         borderRadius: 2,
         overflow: "hidden",
-        backgroundColor: "#ffffff",
+        backgroundColor: "#f5f5f5",
       }}
     >
       <Box
         sx={{
           position: "relative",
           width: "100%",
-          paddingTop: "75%", // Reducido de 100% a 75% para hacer la imagen más pequeña
+          paddingTop: "75%",
           overflow: "hidden",
         }}
       >
