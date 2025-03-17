@@ -6,13 +6,12 @@ import {
   Fade,
   Grid,
   Typography,
-  Alert,
-  Stack,
   Modal,
+  Badge,
 } from "@mui/material";
 import { Products } from "@/components/layouts/Products";
-import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useContext, useState } from "react";
 import { OfferContext } from "@/context/offerContext";
@@ -31,7 +30,9 @@ const modalStyle = {
 
 export default function Home() {
   const [open, setOpen] = useState(false);
-  const { showState, hasBeenSeen } = useContext(OfferContext);
+  const contextValue = useContext(OfferContext);
+  const { showState, hasBeenSeen } = contextValue;
+
 
   const handleOpen = () => {
     setOpen(true);
@@ -40,6 +41,7 @@ export default function Home() {
 
   const handleClose = () => {
     setOpen(false);
+    showState(true);
   };
 
   return (
@@ -47,25 +49,6 @@ export default function Home() {
       title="Licores y bebidas vodka gin rom  Crazy"
       description="Licores bebidas Crazy"
     >
-      {!hasBeenSeen ? (
-        <Stack sx={{ width: "100%", justifyContent: "center" }} spacing={2}>
-          <Alert
-            variant="filled"
-            sx={{
-              textAlign: "center",
-              display: "flex",
-              justifyContent: "center",
-              marginBottom: 3,
-            }}
-            severity="warning"
-          >
-            Tienes ofertas sin mirar!!!!
-          </Alert>
-        </Stack>
-      ) : (
-        <></>
-      )}
-
       <Box
         sx={{
           display: "flex",
@@ -78,46 +61,70 @@ export default function Home() {
           <Typography
             variant="h1"
             style={{
-              fontSize:75,
+              fontSize: 75,
               textAlign: "center",
               lineHeight: "1.2",
               fontWeight: "bold",
             }}
             component="h1"
-            ml={1}
           >
-            Distribución de Bebidas alchólicas.
+            Distribución de Bebidas
           </Typography>
         </Box>
 
         <Grid container spacing={2} justifyContent="center">
           <Grid item>
             <Box display="flex" justifyContent="center" alignItems="center">
-              <ShoppingCartIcon fontSize="large" />
-              <Typography variant="h6" sx={{ mb: 1, ml: 1 }}>
+              <ShoppingCartIcon fontSize="large" color="primary" />
+              <Typography variant="h4" sx={{ ml: 1 }}>
                 Todos los productos
               </Typography>
             </Box>
           </Grid>
           <Grid item>
             <Box display="flex" justifyContent="center" alignItems="center">
-              <PhoneIphoneIcon fontSize="large" />
-              <Typography variant="h6" sx={{ mb: 1, ml: 1 }}>
+              <WhatsAppIcon fontSize="large" color="success" />
+              <Typography variant="h5" sx={{ ml: 1, my: 0 }}>
                 Contacto: 341-6142211
               </Typography>
             </Box>
           </Grid>
         </Grid>
 
-        <Button
-          variant="contained"
-          onClick={handleOpen}
-          color="info"
-          sx={{ padding: 2, width: "80%", mt: 2 }}
+        <Box
+          sx={{ position: "relative", display: "inline-block", width: "80%" }}
         >
-          <VisibilityIcon />
-          Ver Ofertas!!
-        </Button>
+          <Button
+            variant="outlined"
+            onClick={handleOpen}
+            color="info"
+            sx={{
+              padding: 2,
+              width: "100%",
+              mt: 2,
+              "&:hover": {
+                color: "white", // Texto blanco en hover
+                backgroundColor: "#0288d1", // Color de fondo más oscuro en hover (puedes ajustarlo)
+              },
+            }}
+          >
+            <VisibilityIcon sx={{ mr: 1 }} />
+            Ver Ofertas!!
+          </Button>
+          {!hasBeenSeen ? (
+            <Badge
+              badgeContent="1"
+              color="error"
+              sx={{
+                position: "absolute",
+                top: 15,
+                
+                right: 3,
+                zIndex: 999,
+              }}
+            />
+          ) : null}
+        </Box>
 
         <Products />
 
