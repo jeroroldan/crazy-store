@@ -57,7 +57,7 @@ export default function Home() {
           justifyContent: "center",
         }}
       >
-        <Box display="flex" justifyContent="center" alignItems="center" mb={3}>
+        <Box display="flex" justifyContent="center" alignItems="center">
           <Typography
             variant="h1"
             style={{
@@ -73,14 +73,6 @@ export default function Home() {
         </Box>
 
         <Grid container spacing={2} justifyContent="center">
-          <Grid item>
-            <Box display="flex" justifyContent="center" alignItems="center">
-              <ShoppingCartIcon fontSize="large" color="primary" />
-              <Typography variant="h4" sx={{ ml: 1 }}>
-                Todos los productos
-              </Typography>
-            </Box>
-          </Grid>
           <Grid item>
             <Box display="flex" justifyContent="center" alignItems="center">
               <WhatsAppIcon fontSize="large" color="success" />
@@ -103,13 +95,13 @@ export default function Home() {
               width: "100%",
               mt: 2,
               "&:hover": {
-                color: "white", // Texto blanco en hover
-                backgroundColor: "#0288d1", // Color de fondo más oscuro en hover (puedes ajustarlo)
+                color: "white",
+                backgroundColor: "#0288d1", 
               },
             }}
           >
             <VisibilityIcon sx={{ mr: 1 }} />
-            Ver Ofertas!!
+            Ver Oferta
           </Button>
           {!hasBeenSeen ? (
             <Badge
