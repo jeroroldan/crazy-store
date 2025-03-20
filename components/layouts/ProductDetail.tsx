@@ -22,7 +22,8 @@ interface Props {
   product: CrazyProduct;
 }
 
-const ProductDetail: FC<Props> = ({ product }) => {
+const 
+ProductDetail: FC<Props> = ({ product }) => {
   const { showState } = useContext(OfferContext);
   const { description, id, title, url, price } = product;
   const { asPath } = useRouter();

@@ -8,9 +8,11 @@ import {
   Typography,
   Modal,
   Badge,
+  Paper,
 } from "@mui/material";
 import { Products } from "@/components/layouts/Products";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import WarningIcon from "@mui/icons-material/Warning";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useContext, useEffect, useState } from "react";
 import { OfferContext } from "@/context/offerContext";
@@ -122,21 +124,44 @@ export default function Home() {
 
         <Products />
 
-        <Typography
-          variant="h2"
+        <Box
+          component="footer"
           sx={{
-            textTransform: "capitalize",
-            marginTop: 3,
-            color: "#ffff",
-            borderRadius: 3,
-            backgroundColor: "#8e64e7",
             width: "100%",
-            textAlign: "center",
-            padding: "15px",
+            position: "sticky",
+            bottom: 0,
+            mt: 4,
+            zIndex: 10,
           }}
         >
-          PROHIBIDA LA VENTA A MENORES DE 18 años
-        </Typography>
+          <Paper
+            elevation={3}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#8e64e7",
+              py: 1.5,
+              px: 2,
+              borderTopLeftRadius: 8,
+              borderTopRightRadius: 8,
+            }}
+          >
+            <WarningIcon sx={{ color: "#fff", mr: 1.5, fontSize: 28 }} />
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                color: "#fff",
+                fontWeight: 600,
+                letterSpacing: 0.5,
+                textAlign: "center",
+              }}
+            >
+              PROHIBIDA LA VENTA A MENORES DE 18 AÑOS
+            </Typography>
+          </Paper>
+        </Box>
       </Box>
 
       <Modal
