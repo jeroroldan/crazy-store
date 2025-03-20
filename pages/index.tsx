@@ -20,7 +20,7 @@ const modalStyle = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 300,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -98,7 +98,7 @@ export default function Home() {
               mt: 2,
               "&:hover": {
                 color: "white",
-                backgroundColor: "#0288d1", 
+                backgroundColor: "#0288d1",
               },
             }}
           >
@@ -112,7 +112,7 @@ export default function Home() {
               sx={{
                 position: "absolute",
                 top: 15,
-                
+
                 right: 3,
                 zIndex: 999,
               }}
@@ -153,15 +153,77 @@ export default function Home() {
         }}
       >
         <Fade in={open}>
-          <Box sx={modalStyle}>
-            <Typography id="transition-modal-title" variant="h6" component="h2">
-              OFERTA VIGENTE
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: { xs: "90%", sm: 400 },
+              bgcolor: "background.paper",
+              borderRadius: 2,
+              boxShadow: "0 8px 32px rgba(0, 0, 0, 0.12)",
+              p: 4,
+              textAlign: "center",
+            }}
+          >
+            <Box
+              sx={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: 8,
+                bgcolor: "primary.main",
+                borderTopLeftRadius: 8,
+                borderTopRightRadius: 8,
+              }}
+            />
+
+            <Typography
+              variant="h5"
+              component="h2"
+              sx={{
+                fontWeight: 600,
+                mb: 2,
+                color: "primary.main",
+                mt: 1,
+              }}
+            >
+              ¡OFERTA ESPECIAL!
             </Typography>
-            <Box display="flex" flexDirection="column" alignItems="center">
-              <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                Comprando 5 cajas pueden ser surtidas de cada variedad se aplica
-                un 10% al total de la compra.
-              </Typography>
+
+            <Box sx={{ my: 3, display: "flex", justifyContent: "center" }}>
+              <Box
+                sx={{
+                  p: 2,
+                  bgcolor: "primary.light",
+                  borderRadius: 1.5,
+                  color: "primary.contrastText",
+                  display: "inline-block",
+                  fontWeight: "bold",
+                  fontSize: "1.2rem",
+                }}
+              >
+                10% DE DESCUENTO
+              </Box>
+            </Box>
+
+            <Typography sx={{ fontSize: "1rem", mb: 3, lineHeight: 1.6 }}>
+              Lleva 5 cajas o más (pueden ser surtidas) y obtén un 10% de
+              descuento en el total de tu compra.
+            </Typography>
+
+            <Box
+              sx={{ display: "flex", gap: 2, justifyContent: "center", mt: 2 }}
+            >
+              <Button
+                variant="outlined"
+                onClick={handleClose}
+                sx={{ minWidth: 100 }}
+              >
+                Cerrar
+              </Button>
             </Box>
           </Box>
         </Fade>
