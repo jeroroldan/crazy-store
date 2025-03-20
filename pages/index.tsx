@@ -10,10 +10,9 @@ import {
   Badge,
 } from "@mui/material";
 import { Products } from "@/components/layouts/Products";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { OfferContext } from "@/context/offerContext";
 
 const modalStyle = {
@@ -34,14 +33,17 @@ export default function Home() {
   const { showState, hasBeenSeen } = contextValue;
 
 
+  useEffect(() => {
+    if (open) {
+    showState(true);
+    }
+  }, [open]);
   const handleOpen = () => {
     setOpen(true);
-    showState(true);
   };
 
   const handleClose = () => {
     setOpen(false);
-    showState(true);
   };
 
   return (

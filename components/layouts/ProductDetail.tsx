@@ -57,7 +57,6 @@ const ProductDetail: FC<Props> = ({ product }) => {
           position: "relative",
           width: "100%",
           paddingTop: "75%",
-          overflow: "hidden",
         }}
       >
         <Image
