@@ -7,15 +7,17 @@ import {
   Card,
   CardContent,
   CardActions,
-  Chip,
   Tooltip,
   Collapse,
+  IconButton,
+  Divider,
 } from "@mui/material";
 import { CrazyProduct } from "@/models";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import WhatsappIcon from "@mui/icons-material/WhatsApp";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { OfferContext } from "@/context/offerContext";
 
 interface Props {
@@ -38,36 +40,35 @@ const ProductDetail: FC<Props> = ({ product }) => {
 
   return (
     <Card
-      elevation={3}
+      elevation={2}
       sx={{
         display: "flex",
-        marginBottom: 2,
+        marginBottom: 3,
         marginTop: 2,
         flexDirection: "column",
         height: "100%",
-        transition: "all 0.3s ease-in-out",
+        borderRadius: 3,
+        overflow: "hidden",
+        backgroundColor: "#ffffff",
+        position: "relative",
+        transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
         "&:hover": {
           transform: "translateY(-8px)",
-          boxShadow: (theme) => theme.shadows[10],
+          boxShadow: "0 15px 30px rgba(0,0,0,0.1), 0 8px 12px rgba(0,0,0,0.08)",
         },
-        minWidth: "80%",
-        borderRadius: 2,
-        overflow: "hidden",
-        backgroundColor: "#f5f5f5",
-        position: "relative", // Necesario para posicionar el badge
       }}
     >
-      {/* Badge que se muestra siempre que el id es 3 */}
+      {/* Badge mejorado para productos destacados */}
       {id === 3 && (
         <Box
           sx={{
             position: "absolute",
-            top: 20,
-            right: 20,
+            top: 15,
+            right: 15,
             width: 90,
             height: 90,
             borderRadius: "50%",
-            backgroundColor: "#ff3d00",
+            background: "linear-gradient(135deg, #ff3d00 0%, #ff8a65 100%)",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -75,8 +76,14 @@ const ProductDetail: FC<Props> = ({ product }) => {
             color: "white",
             fontWeight: "bold",
             zIndex: 10,
-            boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
-            transform: "rotate(10deg)",
+            boxShadow: "0 4px 12px rgba(255, 61, 0, 0.4)",
+            transform: "rotate(8deg)",
+            animation: "pulse 2s infinite",
+            "@keyframes pulse": {
+              "0%": { boxShadow: "0 0 0 0 rgba(255, 61, 0, 0.4)" },
+              "70%": { boxShadow: "0 0 0 10px rgba(255, 61, 0, 0)" },
+              "100%": { boxShadow: "0 0 0 0 rgba(255, 61, 0, 0)" },
+            },
           }}
         >
           <Typography variant="caption" sx={{ fontSize: "0.7rem", mb: -0.5 }}>
@@ -85,14 +92,31 @@ const ProductDetail: FC<Props> = ({ product }) => {
           <Typography variant="subtitle2" sx={{ fontWeight: 800 }}>
             VENDIDO
           </Typography>
+          <Typography variant="caption" sx={{ fontSize: "0.65rem", mt: -0.5 }}>
+            #1 EN VENTAS
+          </Typography>
         </Box>
       )}
 
+      {/* Contenedor de imagen mejorado */}
       <Box
         sx={{
           position: "relative",
           width: "100%",
           paddingTop: "75%",
+          backgroundColor: "#f9f9f9",
+          overflow: "hidden",
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background:
+              "radial-gradient(circle, rgba(255,255,255,0) 70%, rgba(0,0,0,0.05) 100%)",
+            zIndex: 1,
+          },
         }}
       >
         <Image
@@ -104,65 +128,123 @@ const ProductDetail: FC<Props> = ({ product }) => {
           sizes="(max-width: 568px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </Box>
-      <CardContent sx={{ flexGrow: 1, padding: 2 }}>
+
+      <CardContent sx={{ flexGrow: 1, padding: 3, pb: 1 }}>
         <Box
           sx={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "flex-start",
-            mb: 1,
+            mb: 1.5,
           }}
         >
           <Typography
             variant="h6"
             component="h2"
             sx={{
-              color: "#333",
-              fontWeight: "bold",
+              color: "#2c3e50",
+              fontWeight: "700",
+              lineHeight: 1.3,
               overflow: "hidden",
               textOverflow: "ellipsis",
               display: "-webkit-box",
               WebkitLineClamp: 2,
               WebkitBoxOrient: "vertical",
-              mr: 1,
+              mr: 1.5,
               flex: 1,
             }}
           >
             {title}
           </Typography>
-          <Typography
-            variant="h6"
+          <Box
             sx={{
-              color: "#1976d2",
-              fontWeight: "bold",
-              whiteSpace: "nowrap",
-              backgroundColor: "rgba(25, 118, 210, 0.1)",
-              padding: "4px 8px",
-              borderRadius: "4px",
+              borderRadius: 2,
+              background:
+                "linear-gradient(90deg, rgba(25,118,210,0.08) 0%, rgba(25,118,210,0.16) 100%)",
+              padding: "8px 12px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0 2px 8px rgba(25,118,210,0.1)",
             }}
           >
-            {price.toLocaleString("es-AR", {
-              style: "currency",
-              currency: "ARS",
-            })}
-          </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                color: "#1976d2",
+                fontWeight: "bold",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {price.toLocaleString("es-AR", {
+                style: "currency",
+                currency: "ARS",
+              })}
+            </Typography>
+          </Box>
         </Box>
+
         <Typography
           variant="body2"
-          color="text.secondary"
           sx={{
+            color: "#546e7a",
             overflow: "hidden",
             textOverflow: "ellipsis",
             display: "-webkit-box",
             WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
             mt: 1,
+            lineHeight: 1.5,
           }}
         >
           {description}
         </Typography>
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            mt: 2,
+          }}
+        >
+          <IconButton
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="mostrar más"
+            sx={{
+              transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 0.3s",
+              color: "#9e9e9e",
+              "&:hover": {
+                color: "#1976d2",
+                backgroundColor: "rgba(25, 118, 210, 0.04)",
+              },
+            }}
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </Box>
       </CardContent>
-      <CardActions sx={{ justifyContent: "space-between", padding: 2 }}>
+
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Divider sx={{ mx: 3, opacity: 0.6 }} />
+        <CardContent sx={{ px: 3, py: 2 }}>
+          <Typography
+            paragraph
+            sx={{
+              color: "#546e7a",
+              lineHeight: 1.6,
+              fontSize: "0.9rem",
+            }}
+          >
+            {description}
+          </Typography>
+        </CardContent>
+      </Collapse>
+
+      <Divider sx={{ mx: 3, opacity: 0.6 }} />
+
+      <CardActions sx={{ justifyContent: "center", padding: 2.5 }}>
         {asPath === "/" ? (
           <Link href={`/${product.id}`} passHref legacyBehavior>
             <Tooltip title="Ver detalles del producto">
@@ -173,10 +255,16 @@ const ProductDetail: FC<Props> = ({ product }) => {
                 sx={{
                   borderColor: "#1976d2",
                   color: "#1976d2",
+                  borderRadius: 2,
+                  borderWidth: 1.5,
+                  textTransform: "none",
+                  fontWeight: 600,
+                  px: 3,
                   "&:hover": {
-                    backgroundColor: "#2571DB",
+                    backgroundColor: "#1976d2",
                     color: "#FFFFFF",
-                    borderColor: "#2571DB",
+                    borderColor: "#1976d2",
+                    boxShadow: "0 4px 12px rgba(25, 118, 210, 0.3)",
                   },
                 }}
               >
@@ -192,20 +280,22 @@ const ProductDetail: FC<Props> = ({ product }) => {
             // onClick={handleChangeState}
             sx={{
               backgroundColor: "#1976d2",
+              borderRadius: 2,
+              boxShadow: "0 4px 12px rgba(25, 118, 210, 0.3)",
+              textTransform: "none",
+              fontWeight: 600,
+              px: 3,
+              py: 1,
               "&:hover": {
                 backgroundColor: "#1565c0",
+                boxShadow: "0 6px 15px rgba(25, 118, 210, 0.4)",
               },
             }}
           >
-            Hacer Pédido por Whatsapp al número que figura al inicio
+            Hacer pedido por WhatsApp
           </Button>
         )}
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>{description}</Typography>
-        </CardContent>
-      </Collapse>
     </Card>
   );
 };
