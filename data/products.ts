@@ -3,6 +3,14 @@ import { CrazyProduct } from '@/models'
 
 export const products: CrazyProduct[] = [
   {
+    id: 3,
+    type: "Gin - Bebida blanca",
+    title: "Gin Crazy x1L.",
+    price: 3450,
+    description: "Gin de Calidad superior caja x 6 uni.",
+    url: "/gin.jpg",
+  },
+  {
     id: 0,
     type: "Vodka - Bebida blanca",
     title: "Vodka Crazy x1L.",
@@ -25,14 +33,6 @@ export const products: CrazyProduct[] = [
     price: 3450,
     description: "Tekila de Calidad superior caja x 6 uni.",
     url: "/tekilaCrazy.png",
-  },
-  {
-    id: 3,
-    type: "Gin - Bebida blanca",
-    title: "Gin Crazy x1L.",
-    price: 3450,
-    description: "Gin de Calidad superior caja x 6 uni.",
-    url: "/gin.jpg",
   },
   {
     id: 4,

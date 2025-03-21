@@ -22,8 +22,7 @@ interface Props {
   product: CrazyProduct;
 }
 
-const 
-ProductDetail: FC<Props> = ({ product }) => {
+const ProductDetail: FC<Props> = ({ product }) => {
   const { showState } = useContext(OfferContext);
   const { description, id, title, url, price } = product;
   const { asPath } = useRouter();
@@ -31,6 +30,10 @@ ProductDetail: FC<Props> = ({ product }) => {
 
   const handleChangeState = () => {
     showState(true);
+  };
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
   };
 
   return (
@@ -51,8 +54,40 @@ ProductDetail: FC<Props> = ({ product }) => {
         borderRadius: 2,
         overflow: "hidden",
         backgroundColor: "#f5f5f5",
+        position: "relative", // Necesario para posicionar el badge
       }}
     >
+      {/* Badge que se muestra siempre que el id es 3 */}
+      {id === 3 && (
+        <Box
+          sx={{
+            position: "absolute",
+            top: 20,
+            right: 20,
+            width: 90,
+            height: 90,
+            borderRadius: "50%",
+            backgroundColor: "#ff3d00",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            color: "white",
+            fontWeight: "bold",
+            zIndex: 10,
+            boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
+            transform: "rotate(10deg)",
+          }}
+        >
+          <Typography variant="caption" sx={{ fontSize: "0.7rem", mb: -0.5 }}>
+            MÁS
+          </Typography>
+          <Typography variant="subtitle2" sx={{ fontWeight: 800 }}>
+            VENDIDO
+          </Typography>
+        </Box>
+      )}
+
       <Box
         sx={{
           position: "relative",
@@ -65,7 +100,7 @@ ProductDetail: FC<Props> = ({ product }) => {
           alt={title}
           layout="fill"
           objectFit="contain"
-          loading="lazy" // Carga perezosa en lugar de priority
+          loading="lazy"
           sizes="(max-width: 568px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </Box>

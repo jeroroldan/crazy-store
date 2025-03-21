@@ -17,18 +17,6 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useContext, useEffect, useState } from "react";
 import { OfferContext } from "@/context/offerContext";
 
-const modalStyle = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 300,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-
 export default function Home() {
   const [open, setOpen] = useState(false);
   const contextValue = useContext(OfferContext);
@@ -91,20 +79,34 @@ export default function Home() {
           sx={{ position: "relative", display: "inline-block", width: "80%" }}
         >
           <Button
-            variant="outlined"
+            variant="contained"
             onClick={handleOpen}
             color="info"
             sx={{
-              padding: 2,
+              padding: "12px 24px",
               width: "100%",
               mt: 2,
+              borderRadius: 2,
+              fontWeight: 600,
+              fontSize: "1rem",
+              textTransform: "none",
+              boxShadow:
+                "0 6px 12px rgba(2, 136, 209, 0.25), 0 4px 6px rgba(0, 0, 0, 0.1)",
+              transition: "all 0.3s ease",
               "&:hover": {
-                color: "white",
-                backgroundColor: "#0288d1",
+                backgroundColor: "#0277bd",
+                transform: "translateY(-3px)",
+                boxShadow:
+                  "0 8px 15px rgba(2, 136, 209, 0.3), 0 5px 10px rgba(0, 0, 0, 0.15)",
+              },
+              "&:active": {
+                transform: "translateY(1px)",
+                boxShadow:
+                  "0 3px 8px rgba(2, 136, 209, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1)",
               },
             }}
+            startIcon={<VisibilityIcon />}
           >
-            <VisibilityIcon sx={{ mr: 1 }} />
             Ver Oferta
           </Button>
           {!hasBeenSeen ? (
@@ -129,8 +131,9 @@ export default function Home() {
           sx={{
             width: "100%",
             position: "sticky",
+            backgroundColor: "#42a5f5",
             bottom: 0,
-            mt: 4,
+            mt: 2,
             zIndex: 10,
           }}
         >
@@ -140,7 +143,7 @@ export default function Home() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "#8e64e7",
+              backgroundColor: "#42a5f5",
               py: 1.5,
               px: 2,
               borderTopLeftRadius: 8,
