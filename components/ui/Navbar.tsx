@@ -7,7 +7,7 @@ const Navbar = () => {
     <AppBar
       className="image-fondo"
       sx={{
-        minHeight: "250px",
+        minHeight: "270px",
         position: "relative",
         display: "flex",
         alignItems: "center",
