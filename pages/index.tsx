@@ -79,7 +79,7 @@ export default function Home() {
             pb: 6, // Padding bottom para evitar que el contenido sea tapado por el footer
           }}
         >
-          <Box display="flex" justifyContent="center" alignItems="center">
+          <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
             <Typography
               variant="h1"
               style={{
@@ -90,7 +90,19 @@ export default function Home() {
               }}
               component="h1"
             >
-              Distribución de Bebidas
+              Crazy Licores
+            </Typography>
+            <Typography
+              variant="h3"
+              style={{
+                fontSize: 23,
+                textAlign: "center",
+                lineHeight: "1.2",
+                fontWeight: "bold",
+              }}
+              component="h1"
+            >
+              Temporada Invierno
             </Typography>
           </Box>
 

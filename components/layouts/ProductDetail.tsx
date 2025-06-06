@@ -122,8 +122,8 @@ const ProductDetail: FC<Props> = ({ product }) => {
         <Image
           src={url}
           alt={title}
-          layout="fill"
-          objectFit="contain"
+          fill
+          style={{ objectFit: "contain" }}
           loading="lazy"
           sizes="(max-width: 568px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
