@@ -5,8 +5,8 @@ import ProductDetail from "@/components/layouts/ProductDetail";
 import { ShopLayout } from "@/components/layouts";
 import products from "@/data/products";
 import Link from "next/link";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import DoneIcon from "@mui/icons-material/Done";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack.js";
+import DoneIcon from "@mui/icons-material/Done.js";
 
 // Lista de beneficios como constante fuera del componente para evitar recrearla
 const PRODUCT_BENEFITS = [

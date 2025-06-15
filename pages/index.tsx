@@ -13,10 +13,10 @@ import {
   Zoom,
 } from "@mui/material";
 import { Products } from "@/components/layouts/Products";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import WarningIcon from "@mui/icons-material/Warning";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp.js";
+import WarningIcon from "@mui/icons-material/Warning.js";
+import VisibilityIcon from "@mui/icons-material/Visibility.js";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp.js";
 import { useContext, useEffect, useState } from "react";
 import { OfferContext } from "@/context/offerContext";
 

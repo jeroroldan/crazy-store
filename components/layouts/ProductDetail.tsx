@@ -15,9 +15,9 @@ import {
 import { CrazyProduct } from "@/models";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import WhatsappIcon from "@mui/icons-material/WhatsApp";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { ArrowForward } from "@mui/icons-material";
+import WhatsappIcon from "@mui/icons-material/WhatsApp.js";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore.js";
 import { OfferContext } from "@/context/offerContext";
 
 interface Props {
@@ -250,7 +250,7 @@ const ProductDetail: FC<Props> = ({ product }) => {
             <Tooltip title="Ver detalles del producto">
               <Button
                 variant="outlined"
-                startIcon={<ArrowForwardIcon />}
+                startIcon={<ArrowForward />}
                 size="medium"
                 sx={{
                   borderColor: "#1976d2",
