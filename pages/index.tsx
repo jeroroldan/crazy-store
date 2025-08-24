@@ -1,157 +1,252 @@
 import { ShopLayout } from "@/components/layouts";
-import {
-  Backdrop,
-  Box,
-  Button,
-  Fade,
-  Grid,
-  Typography,
-  Modal,
-  Badge,
-  Paper,
-  Fab,
-  Zoom,
-} from "@mui/material";
+import { Box, Button, Grid, Typography, Badge, Fab, Zoom } from "@mui/material";
 import { Products } from "@/components/layouts/Products";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp.js";
-import WarningIcon from "@mui/icons-material/Warning.js";
 import VisibilityIcon from "@mui/icons-material/Visibility.js";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp.js";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback, useMemo } from "react";
 import { OfferContext } from "@/context/offerContext";
+import dynamic from "next/dynamic";
+import { styled } from "@mui/system";
 
-export default function Home() {
-  const [open, setOpen] = useState(false);
-  const contextValue = useContext(OfferContext);
-  const { showState, hasBeenSeen } = contextValue;
+// Dynamic imports optimizados con loading
+const OfferModal = dynamic(() => import("@/components/ui/OfferModal"), {
+  ssr: false,
+  loading: () => <div>Cargando oferta...</div>,
+});
+
+const Footer = dynamic(() => import("../components/ui/Footer"), {
+  ssr: false,
+  loading: () => <div>Cargando...</div>,
+});
+
+// Styled Components para mejor rendimiento
+const MainContainer = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  minHeight: "100vh",
+}));
+
+const ContentContainer = styled(Box)(({ theme }) => ({
+  flex: "1 0 auto",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "flex-start",
+  paddingBottom: theme.spacing(6),
+}));
+
+const HeaderContainer = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  marginBottom: theme.spacing(3),
+}));
+
+const MainTitle = styled(Typography, {
+  shouldForwardProp: (prop) => prop !== "classes" && prop !== "sx" && prop !== "theme",
+})(({ theme }) => ({
+  fontSize: "clamp(2.5rem, 8vw, 4rem)", // Responsive font size
+  textAlign: "center",
+  lineHeight: 1.2,
+  fontWeight: "bold",
+  background: "linear-gradient(45deg, #1976d2, #42a5f5)",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+  marginBottom: theme.spacing(1),
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "2.5rem",
+  },
+}));
+
+const SubTitle = styled(Typography)(({ theme }) => ({
+  fontSize: "clamp(1.2rem, 4vw, 1.5rem)",
+  textAlign: "center",
+  lineHeight: 1.2,
+  fontWeight: "bold",
+  color: theme.palette.text.secondary,
+  marginBottom: theme.spacing(2),
+}));
+
+const ContactContainer = styled(Grid)(({ theme }) => ({
+  marginBottom: theme.spacing(3),
+  width: "100%",
+  maxWidth: 600,
+}));
+
+const WhatsAppContainer = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: theme.spacing(2),
+  backgroundColor: theme.palette.grey[50],
+  borderRadius: theme.spacing(2),
+  border: `2px solid ${theme.palette.success.light}`,
+  transition: "all 0.3s ease",
+  cursor: "pointer",
+  "&:hover": {
+    backgroundColor: theme.palette.success.light,
+    transform: "translateY(-2px)",
+    boxShadow: theme.shadows[4],
+  },
+}));
+
+const OfferButtonContainer = styled(Box)(({ theme }) => ({
+  position: "relative",
+  display: "inline-block",
+  width: "100%",
+  maxWidth: 400,
+  marginBottom: theme.spacing(4),
+}));
+
+const OfferButton = styled(Button)(({ theme }) => ({
+  padding: "12px 24px",
+  width: "100%",
+  borderRadius: theme.spacing(2),
+  fontWeight: 600,
+  fontSize: "1rem",
+  textTransform: "none",
+  boxShadow: "0 6px 12px rgba(2, 136, 209, 0.25), 0 4px 6px rgba(0, 0, 0, 0.1)",
+  transition: "all 0.3s ease",
+  "&:hover": {
+    backgroundColor: "#0277bd",
+    transform: "translateY(-3px)",
+    boxShadow:
+      "0 8px 15px rgba(2, 136, 209, 0.3), 0 5px 10px rgba(0, 0, 0, 0.15)",
+  },
+  "&:active": {
+    transform: "translateY(1px)",
+    boxShadow: "0 3px 8px rgba(2, 136, 209, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1)",
+  },
+}));
+
+const ScrollTopFab = styled(Fab)(({ theme }) => ({
+  position: "fixed",
+  bottom: 80,
+  right: 30,
+  zIndex: 1000,
+  boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+  transition: "all 0.3s ease",
+  "&:hover": {
+    transform: "scale(1.1)",
+  },
+}));
+
+// Custom hooks para lógica reutilizable
+const useScrollTop = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  // Controlar cuándo mostrar el botón de scroll
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Throttle para mejor rendimiento
+    let timeoutId: NodeJS.Timeout;
+    const throttledHandleScroll = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(handleScroll, 100);
+    };
+
+    window.addEventListener("scroll", throttledHandleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", throttledHandleScroll);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
-  useEffect(() => {
-    if (open) {
-      showState(true);
-    }
-  }, [open]);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const scrollToTop = () => {
+  const scrollToTop = useCallback(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
-  };
+  }, []);
+
+  return { showScrollTop, scrollToTop };
+};
+
+// Constantes para evitar hardcoding
+const CONTACT_PHONE = "341-6142211";
+const WHATSAPP_URL = `https://wa.me/54${CONTACT_PHONE.replace(/-/g, "")}`;
+
+export default function Home() {
+  const [open, setOpen] = useState(false);
+  const contextValue = useContext(OfferContext);
+  const { showState, hasBeenSeen } = contextValue;
+  const { showScrollTop, scrollToTop } = useScrollTop();
+
+  // Memoizar handlers para evitar re-renders innecesarios
+  const handleOpen = useCallback(() => {
+    setOpen(true);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setOpen(false);
+  }, []);
+
+  const handleWhatsAppClick = useCallback(() => {
+    window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer");
+  }, []);
+
+  // Effect optimizado
+  useEffect(() => {
+    if (open) {
+      showState(true);
+    }
+  }, [open, showState]);
+
+  // Memoizar datos estáticos
+  const pageData = useMemo(
+    () => ({
+      title: "Licores y bebidas vodka gin rom Crazy",
+      description:
+        "Licores bebidas Crazy - Los mejores precios en bebidas alcohólicas",
+      mainTitle: "Crazy Licores",
+      subTitle: "Temporada Invierno",
+      contactText: `Hacé tu pedido: ${CONTACT_PHONE}`,
+    }),
+    []
+  );
 
   return (
-    <ShopLayout
-      title="Licores y bebidas vodka gin rom  Crazy"
-      description="Licores bebidas Crazy"
-    >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          minHeight: "100vh", // Asegura que el contenedor ocupe al menos toda la altura de la pantalla
-        }}
-      >
-        <Box
-          sx={{
-            flex: "1 0 auto", // Esto permite que este Box crezca y ocupe el espacio disponible
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "flex-start", // Cambié a flex-start para que el contenido no se centre verticalmente
-            pb: 6, // Padding bottom para evitar que el contenido sea tapado por el footer
-          }}
-        >
-          <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-            <Typography
-              variant="h1"
-              style={{
-                fontSize: 65,
-                textAlign: "center",
-                lineHeight: "1.2",
-                fontWeight: "bold",
-              }}
-              component="h1"
-            >
-              Crazy Licores
-            </Typography>
-            <Typography
-              variant="h3"
-              style={{
-                fontSize: 23,
-                textAlign: "center",
-                lineHeight: "1.2",
-                fontWeight: "bold",
-              }}
-              component="h1"
-            >
-              Temporada Invierno
-            </Typography>
-          </Box>
+    <ShopLayout title={pageData.title} description={pageData.description}>
+      <MainContainer>
+        <ContentContainer>
+          <HeaderContainer>
+            <MainTitle variant="h1" as="h1">
+              {pageData.mainTitle}
+            </MainTitle>
+            <SubTitle variant="h2" as="h2">
+              {pageData.subTitle}
+            </SubTitle>
+          </HeaderContainer>
 
-          <Grid container spacing={2} justifyContent="center">
-            <Grid item>
-              <Box display="flex" justifyContent="center" alignItems="center">
+          <ContactContainer container justifyContent="center">
+            <Grid item xs={12} sm={10} md={8}>
+              <WhatsAppContainer onClick={handleWhatsAppClick}>
                 <WhatsAppIcon fontSize="large" color="success" />
-                <Typography variant="h6" sx={{ ml: 1, my: 0 }}>
-                  Hace tú pedido: 341-6142211
+                <Typography
+                  variant="h6"
+                  sx={{ ml: 1, textAlign: "center", fontWeight: 600 }}
+                >
+                  {pageData.contactText}
                 </Typography>
-              </Box>
+              </WhatsAppContainer>
             </Grid>
-          </Grid>
+          </ContactContainer>
 
-          <Box
-            sx={{ position: "relative", display: "inline-block", width: "80%" }}
-          >
-            <Button
+          <OfferButtonContainer>
+            <OfferButton
               variant="contained"
               onClick={handleOpen}
               color="info"
-              sx={{
-                padding: "12px 24px",
-                width: "100%",
-                mt: 2,
-                borderRadius: 2,
-                fontWeight: 600,
-                fontSize: "1rem",
-                textTransform: "none",
-                boxShadow:
-                  "0 6px 12px rgba(2, 136, 209, 0.25), 0 4px 6px rgba(0, 0, 0, 0.1)",
-                transition: "all 0.3s ease",
-                "&:hover": {
-                  backgroundColor: "#0277bd",
-                  transform: "translateY(-3px)",
-                  boxShadow:
-                    "0 8px 15px rgba(2, 136, 209, 0.3), 0 5px 10px rgba(0, 0, 0, 0.15)",
-                },
-                "&:active": {
-                  transform: "translateY(1px)",
-                  boxShadow:
-                    "0 3px 8px rgba(2, 136, 209, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1)",
-                },
-              }}
               startIcon={<VisibilityIcon />}
+              aria-label="Ver oferta especial"
             >
               Ver Oferta
-            </Button>
-            {!hasBeenSeen ? (
+            </OfferButton>
+            {!hasBeenSeen && (
               <Badge
                 badgeContent="1"
                 color="error"
@@ -161,163 +256,31 @@ export default function Home() {
                   right: 3,
                   zIndex: 999,
                 }}
+                aria-label="Nueva oferta disponible"
               />
-            ) : null}
-          </Box>
+            )}
+          </OfferButtonContainer>
 
           <Products />
-        </Box>
+        </ContentContainer>
 
-        {/* Footer como componente de pie de página fijo */}
-        <Box
-          component="footer"
-          sx={{
-            width: "100%",
-            flexShrink: 0, // Evita que el footer se encoja
-            backgroundColor: "#42a5f5",
-            mt: "auto", // Empuja el footer hacia abajo automáticamente
-            zIndex: 10,
-          }}
-        >
-          <Paper
-            elevation={3}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "#42a5f5",
-              py: 1.5,
-              px: 2,
-              borderTopLeftRadius: 8,
-              borderTopRightRadius: 8,
-            }}
-          >
-            <WarningIcon sx={{ color: "#fff", mr: 1.5, fontSize: 28 }} />
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{
-                color: "#fff",
-                fontWeight: 600,
-                letterSpacing: 0.5,
-                textAlign: "center",
-              }}
-            >
-              PROHIBIDA LA VENTA A MENORES DE 18 AÑOS
-            </Typography>
-          </Paper>
-        </Box>
-      </Box>
+        <Footer />
+      </MainContainer>
 
       {/* Botón para volver arriba */}
       <Zoom in={showScrollTop}>
-        <Fab
+        <ScrollTopFab
           color="primary"
           size="medium"
-          aria-label="scroll back to top"
+          aria-label="Volver arriba"
           onClick={scrollToTop}
-          sx={{
-            position: "fixed",
-            bottom: 80,
-            right: 30, // Aumentado de 16 a 30px para alejarlo del borde
-            zIndex: 1000,
-            boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-          }}
         >
           <KeyboardArrowUpIcon />
-        </Fab>
+        </ScrollTopFab>
       </Zoom>
 
-      {/* Modal */}
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
-            timeout: 500,
-          },
-        }}
-      >
-        <Fade in={open}>
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: { xs: "90%", sm: 400 },
-              bgcolor: "background.paper",
-              borderRadius: 2,
-              boxShadow: "0 8px 32px rgba(0, 0, 0, 0.12)",
-              p: 4,
-              textAlign: "center",
-            }}
-          >
-            <Box
-              sx={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: 8,
-                bgcolor: "primary.main",
-                borderTopLeftRadius: 8,
-                borderTopRightRadius: 8,
-              }}
-            />
-
-            <Typography
-              variant="h5"
-              component="h2"
-              sx={{
-                fontWeight: 600,
-                mb: 2,
-                color: "primary.main",
-                mt: 1,
-              }}
-            >
-              ¡OFERTA ESPECIAL!
-            </Typography>
-
-            <Box sx={{ my: 3, display: "flex", justifyContent: "center" }}>
-              <Box
-                sx={{
-                  p: 2,
-                  bgcolor: "primary.light",
-                  borderRadius: 1.5,
-                  color: "primary.contrastText",
-                  display: "inline-block",
-                  fontWeight: "bold",
-                  fontSize: "1.2rem",
-                }}
-              >
-                10% DE DESCUENTO
-              </Box>
-            </Box>
-
-            <Typography sx={{ fontSize: "1rem", mb: 3, lineHeight: 1.6 }}>
-              Lleva 5 cajas o más (pueden ser surtidas) y obtén un 10% de
-              descuento en el total de tu compra.
-            </Typography>
-
-            <Box
-              sx={{ display: "flex", gap: 2, justifyContent: "center", mt: 2 }}
-            >
-              <Button
-                variant="outlined"
-                onClick={handleClose}
-                sx={{ minWidth: 100 }}
-              >
-                Cerrar
-              </Button>
-            </Box>
-          </Box>
-        </Fade>
-      </Modal>
+      {/* Modal de oferta */}
+      <OfferModal open={open} handleClose={handleClose} />
     </ShopLayout>
   );
 }
