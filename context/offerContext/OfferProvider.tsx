@@ -1,6 +1,8 @@
 import { FC, useReducer, ReactNode } from "react";
 import { OfferContext, offerReducer } from "./";
 
+
+
 export interface OfferState {
   hasBeenSeen: boolean;
 }

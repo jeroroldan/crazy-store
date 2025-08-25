@@ -1,58 +1,32 @@
-import { FC } from "react";
 import Head from "next/head";
-import Navbar from "../ui/Navbar";
-import { Box, Container } from "@mui/material";
+import { ReactNode } from "react";
 
-interface LayoutProps {
+interface Props {
   title: string;
   description: string;
-  imageUrl?: string;
-  children: JSX.Element | JSX.Element[];
+  children: ReactNode;
 }
 
-export const ShopLayout: FC<LayoutProps> = ({
-  children,
-  title,
-  description,
-  imageUrl,
-}) => {
+export const ShopLayout = ({ children, title, description }: Props) => {
   return (
     <>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        {imageUrl && <meta property="og:image" content={imageUrl} />}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <nav>
-        <Navbar />
-      </nav>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+        {/* Header/AppBar convertido a Tailwind */}
+        <header className="bg-primary-600 shadow-lg">
+          <div className="max-w-7xl mx-auto px-4 py-4">
+            <h1 className="text-white text-xl font-bold">Crazy Licores</h1>
+          </div>
+        </header>
 
-      <Container component="main" sx={mainStyles}>
-        {children}
-      </Container>
+        {/* Main content */}
+        <main className="min-h-[calc(100vh-80px)]">{children}</main>
+      </div>
     </>
   );
 };
-
-const mainStyles = {
-  margin: "16px auto",
-  maxWidth: "1440px",
-  padding: "0 30px",
-  display: "flex",
-  flexDirection: "column" as const,
-  justifyContent: "center",
-  alignItems: "center",
-};
-
-const footerStyles = {
-  marginTop: "auto",
-  padding: "20px 0",
-  textAlign: "center",
-  backgroundColor: "#f8f8f8",
-  borderTop: "1px solid #e7e7e7",
-};
-
-export default ShopLayout;

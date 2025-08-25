@@ -1,45 +1,15 @@
-import { Box, Paper, Typography } from "@mui/material";
-import WarningIcon from "@mui/icons-material/Warning.js";
+import React from "react";
+import { FaExclamationTriangle } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <Box
-      component="footer"
-      sx={{
-        width: "100%",
-        flexShrink: 0,
-        backgroundColor: "#42a5f5",
-        mt: "auto",
-        zIndex: 10,
-      }}
-    >
-      <Paper
-        elevation={3}
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#42a5f5",
-          py: 1.5,
-          px: 2,
-          borderTopLeftRadius: 8,
-          borderTopRightRadius: 8,
-        }}
-      >
-        <WarningIcon sx={{ color: "#fff", mr: 1.5, fontSize: 28 }} />
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{
-            color: "#fff",
-            fontWeight: 600,
-            letterSpacing: 0.5,
-            textAlign: "center",
-          }}
-        >
+    <footer className="w-full flex-shrink-0 bg-primary-400 mt-auto z-10">
+      <div className="flex items-center justify-center bg-primary-400 py-6 px-4 rounded-t-lg shadow-lg">
+        <FaExclamationTriangle className="text-white text-3xl mr-4 flex-shrink-0" />
+        <h6 className="text-white text-lg md:text-xl font-semibold tracking-wider text-center leading-tight">
           PROHIBIDA LA VENTA A MENORES DE 18 AÑOS
-        </Typography>
-      </Paper>
-    </Box>
+        </h6>
+      </div>
+    </footer>
   );
 }

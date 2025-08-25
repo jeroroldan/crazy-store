@@ -1,12 +1,11 @@
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
-import { Box, Button, Card, Grid, Typography } from "@mui/material";
 import ProductDetail from "@/components/layouts/ProductDetail";
 import { ShopLayout } from "@/components/layouts";
 import products from "@/data/products";
 import Link from "next/link";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack.js";
-import DoneIcon from "@mui/icons-material/Done.js";
+// Cambia la importación de íconos
+import { FaArrowLeft, FaCheck } from "react-icons/fa";
 
 // Lista de beneficios como constante fuera del componente para evitar recrearla
 const PRODUCT_BENEFITS = [
@@ -19,76 +18,40 @@ const PRODUCT_BENEFITS = [
   "Producto en temporada",
 ];
 
-// Estilos constantes fuera del componente para evitar recreaciones
-const styles = {
-  benefitsCard: {
-    borderRadius: 2,
-    p: 3,
-    backgroundColor: "#f9f9f9",
-    maxWidth: 400,
-    mx: "auto",
-    border: "1px solid #e0e0e0",
-    overflow: "visible",
-  },
-  benefitsTitle: {
-    textAlign: "center",
-    mb: 3,
-    fontWeight: 600,
-    color: "#1976d2",
-    position: "relative",
-    "&:after": {
-      content: '""',
-      position: "absolute",
-      width: 40,
-      height: 3,
-      backgroundColor: "#1976d2",
-      bottom: -8,
-      left: "50%",
-      transform: "translateX(-50%)",
-    },
-  },
-  benefitItem: {
-    display: "flex",
-    alignItems: "center",
-    py: 0.5,
-    px: 1,
-    borderRadius: 1,
-    transition: "all 0.2s ease",
-    "&:hover": {
-      backgroundColor: "rgba(25, 118, 210, 0.08)",
-      transform: "translateX(5px)",
-    },
-  },
-  benefitIcon: {
-    color: "#1976d2",
-    mr: 1.5,
-    backgroundColor: "rgba(25, 118, 210, 0.12)",
-    borderRadius: "50%",
-    p: 0.5,
-  },
-  benefitText: {
-    fontWeight: 500,
-    color: "#424242",
-  },
-};
-
 // Componente extraído para los beneficios
-const ProductBenefits = () => (
-  <Card elevation={2} sx={styles.benefitsCard}>
-    <Typography variant="h6" sx={styles.benefitsTitle}>
-      Beneficios del producto
-    </Typography>
+const ProductBenefits = React.memo(() => (
+  <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 max-w-md mx-auto shadow-sm">
+    {/* Título con línea decorativa */}
+    <div className="text-center mb-6 relative">
+      <h3 className="text-xl font-semibold text-primary-700 mb-2">
+        Beneficios del producto
+      </h3>
+      <div className="w-10 h-1 bg-primary-700 mx-auto rounded-full"></div>
+    </div>
 
-    <Grid container direction="column" spacing={2} sx={{ mt: 1 }}>
+    {/* Lista de beneficios */}
+    <div className="space-y-3 mt-4">
       {PRODUCT_BENEFITS.map((text, index) => (
-        <Grid item key={index} sx={styles.benefitItem}>
-          <DoneIcon sx={styles.benefitIcon} />
-          <Typography sx={styles.benefitText}>{text}</Typography>
-        </Grid>
+        <div
+          key={index}
+          className="flex items-center py-2 px-3 rounded-lg transition-all duration-200 hover:bg-primary-50 hover:transform hover:translate-x-1"
+        >
+          <div className="flex-shrink-0 w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+            {/* Usa React.createElement para evitar el error de tipos */}
+            {React.createElement(FaCheck, {
+              className: "text-primary-700 text-sm",
+            })}
+          </div>
+          <span className="font-medium text-gray-700 text-sm leading-relaxed">
+            {text}
+          </span>
+        </div>
       ))}
-    </Grid>
-  </Card>
-);
+    </div>
+  </div>
+));
+
+ProductBenefits.displayName = "ProductBenefits";
 
 const PageDetailProduct = () => {
   const { query } = useRouter();
@@ -98,18 +61,28 @@ const PageDetailProduct = () => {
     [valueId]
   );
 
+  // Estado de producto no encontrado
   if (!product) {
     return (
       <ShopLayout title="Producto no encontrado" description="Licores Crazy">
-        <Box textAlign="center" py={5}>
-          <Typography variant="h5">Producto no encontrado</Typography>
-          <Link href="/" passHref>
-            <Button variant="contained" color="primary" sx={{ mt: 3 }}>
-              <ArrowBackIcon sx={{ mr: 1 }} />
+        <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
+          <div className="max-w-md">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
+              Producto no encontrado
+            </h1>
+            <p className="text-gray-600 mb-8">
+              El producto que buscas no existe o ha sido eliminado.
+            </p>
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+            >
+              {/* Usa React.createElement para evitar el error de tipos */}
+              {React.createElement(FaArrowLeft, { className: "text-sm" })}
               Volver a productos
-            </Button>
-          </Link>
-        </Box>
+            </Link>
+          </div>
+        </div>
       </ShopLayout>
     );
   }
@@ -119,32 +92,31 @@ const PageDetailProduct = () => {
       title={`${product.title} - Licores Crazy`}
       description={`Detalles del producto: ${product.title}`}
     >
-      <Box display="flex" justifyContent="space-between" mb={2}>
-        <Link href="/" replace>
-          <Button
-            variant="contained"
-            size="large"
-            color="success"
-            sx={{ width: "200px" }}
+      {/* Contenedor principal */}
+      <div className="max-w-7xl mx-auto px-4 py-6">
+        {/* Botón de retroceso */}
+        <div className="flex justify-start mb-6">
+          <Link
+            href="/"
+            replace
+            className="inline-flex items-center gap-2 bg-success-600 hover:bg-success-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg min-w-[200px] justify-center"
           >
-            <ArrowBackIcon />
+            {/* Usa React.createElement para evitar el error de tipos */}
+            {React.createElement(FaArrowLeft, { className: "text-sm" })}
             Volver
-          </Button>
-        </Link>
-      </Box>
+          </Link>
+        </div>
 
-      <ProductDetail product={product} />
+        {/* Detalle del producto */}
+        <div className="mb-8">
+          <ProductDetail product={product} />
+        </div>
 
-      <Box
-        border={0.5}
-        borderRadius="5px"
-        padding={2}
-        bgcolor="#eaeaea"
-        width="100%"
-        mt={2}
-      >
-        <ProductBenefits />
-      </Box>
+        {/* Sección de beneficios */}
+        <div className="bg-gray-100 border border-gray-300 rounded-xl p-6 w-full">
+          <ProductBenefits />
+        </div>
+      </div>
     </ShopLayout>
   );
 };

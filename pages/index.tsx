@@ -1,157 +1,54 @@
 import { ShopLayout } from "@/components/layouts";
-import { Box, Button, Grid, Typography, Badge, Fab, Zoom } from "@mui/material";
-import { Products } from "@/components/layouts/Products";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp.js";
-import VisibilityIcon from "@mui/icons-material/Visibility.js";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp.js";
-import { useContext, useEffect, useState, useCallback, useMemo } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import { OfferContext } from "@/context/offerContext";
 import dynamic from "next/dynamic";
-import { styled } from "@mui/system";
+import { useInView } from "react-intersection-observer";
 
-// Dynamic imports optimizados con loading
+
+
+// Íconos de react-icons (más ligero que MUI icons)
+import { FaWhatsapp, FaEye, FaChevronUp } from "react-icons/fa";
+
+// 3. OPTIMIZACIÓN: Carga dinámica de componentes pesados
+const Products = dynamic(() => import("@/components/layouts/Products"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex justify-center items-center p-8 min-h-[200px]">
+      <div className="spinner"></div>
+      <span className="ml-3 text-lg font-semibold text-primary-600">
+        Cargando productos...
+      </span>
+    </div>
+  ),
+});
+
 const OfferModal = dynamic(() => import("@/components/ui/OfferModal"), {
   ssr: false,
-  loading: () => <div>Cargando oferta...</div>,
+  loading: () => null,
 });
 
 const Footer = dynamic(() => import("../components/ui/Footer"), {
   ssr: false,
-  loading: () => <div>Cargando...</div>,
+  loading: () => null,
 });
 
-// Styled Components para mejor rendimiento
-const MainContainer = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  minHeight: "100vh",
-}));
-
-const ContentContainer = styled(Box)(({ theme }) => ({
-  flex: "1 0 auto",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "flex-start",
-  paddingBottom: theme.spacing(6),
-}));
-
-const HeaderContainer = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  marginBottom: theme.spacing(3),
-}));
-
-const MainTitle = styled(Typography, {
-  shouldForwardProp: (prop) => prop !== "classes" && prop !== "sx" && prop !== "theme",
-})(({ theme }) => ({
-  fontSize: "clamp(2.5rem, 8vw, 4rem)", // Responsive font size
-  textAlign: "center",
-  lineHeight: 1.2,
-  fontWeight: "bold",
-  background: "linear-gradient(45deg, #1976d2, #42a5f5)",
-  WebkitBackgroundClip: "text",
-  WebkitTextFillColor: "transparent",
-  marginBottom: theme.spacing(1),
-  [theme.breakpoints.down("sm")]: {
-    fontSize: "2.5rem",
-  },
-}));
-
-const SubTitle = styled(Typography)(({ theme }) => ({
-  fontSize: "clamp(1.2rem, 4vw, 1.5rem)",
-  textAlign: "center",
-  lineHeight: 1.2,
-  fontWeight: "bold",
-  color: theme.palette.text.secondary,
-  marginBottom: theme.spacing(2),
-}));
-
-const ContactContainer = styled(Grid)(({ theme }) => ({
-  marginBottom: theme.spacing(3),
-  width: "100%",
-  maxWidth: 600,
-}));
-
-const WhatsAppContainer = styled(Box)(({ theme }) => ({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: theme.spacing(2),
-  backgroundColor: theme.palette.grey[50],
-  borderRadius: theme.spacing(2),
-  border: `2px solid ${theme.palette.success.light}`,
-  transition: "all 0.3s ease",
-  cursor: "pointer",
-  "&:hover": {
-    backgroundColor: theme.palette.success.light,
-    transform: "translateY(-2px)",
-    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)", // Cambia esta línea
-  },
-}));
-
-const OfferButtonContainer = styled(Box)(({ theme }) => ({
-  position: "relative",
-  display: "inline-block",
-  width: "100%",
-  maxWidth: 400,
-  marginBottom: theme.spacing(4),
-}));
-
-const OfferButton = styled(Button)(({ theme }) => ({
-  padding: "12px 24px",
-  width: "100%",
-  borderRadius: theme.spacing(2),
-  fontWeight: 600,
-  fontSize: "1rem",
-  textTransform: "none",
-  boxShadow: "0 6px 12px rgba(2, 136, 209, 0.25), 0 4px 6px rgba(0, 0, 0, 0.1)",
-  transition: "all 0.3s ease",
-  "&:hover": {
-    backgroundColor: "#0277bd",
-    transform: "translateY(-3px)",
-    boxShadow:
-      "0 8px 15px rgba(2, 136, 209, 0.3), 0 5px 10px rgba(0, 0, 0, 0.15)",
-  },
-  "&:active": {
-    transform: "translateY(1px)",
-    boxShadow: "0 3px 8px rgba(2, 136, 209, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1)",
-  },
-}));
-
-const ScrollTopFab = styled(Fab)(({ theme }) => ({
-  position: "fixed",
-  bottom: 80,
-  right: 30,
-  zIndex: 1000,
-  boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-  transition: "all 0.3s ease",
-  "&:hover": {
-    transform: "scale(1.1)",
-  },
-}));
-
-// Custom hooks para lógica reutilizable
+// 5. OPTIMIZACIÓN: Custom hook optimizado con throttling
 const useScrollTop = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 300);
-    };
-
-    // Throttle para mejor rendimiento
     let timeoutId: NodeJS.Timeout;
-    const throttledHandleScroll = () => {
+
+    const handleScroll = () => {
       clearTimeout(timeoutId);
-      timeoutId = setTimeout(handleScroll, 100);
+      timeoutId = setTimeout(() => {
+        setShowScrollTop(window.scrollY > 300);
+      }, 100);
     };
 
-    window.addEventListener("scroll", throttledHandleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
-      window.removeEventListener("scroll", throttledHandleScroll);
+      window.removeEventListener("scroll", handleScroll);
       clearTimeout(timeoutId);
     };
   }, []);
@@ -166,9 +63,19 @@ const useScrollTop = () => {
   return { showScrollTop, scrollToTop };
 };
 
-// Constantes para evitar hardcoding
+// 6. OPTIMIZACIÓN: Constantes fuera del componente
 const CONTACT_PHONE = "341-6142211";
 const WHATSAPP_URL = `https://wa.me/54${CONTACT_PHONE.replace(/-/g, "")}`;
+
+// 7. OPTIMIZACIÓN: Datos estáticos memoizados fuera del componente
+const PAGE_DATA = {
+  title: "Licores y bebidas vodka gin rom Crazy",
+  description:
+    "Licores bebidas Crazy - Los mejores precios en bebidas alcohólicas",
+  mainTitle: "Crazy Licores",
+  subTitle: "Temporada Invierno",
+  contactText: `Hacé tu pedido: ${CONTACT_PHONE}`,
+};
 
 export default function Home() {
   const [open, setOpen] = useState(false);
@@ -176,7 +83,14 @@ export default function Home() {
   const { showState, hasBeenSeen } = contextValue;
   const { showScrollTop, scrollToTop } = useScrollTop();
 
-  // Memoizar handlers para evitar re-renders innecesarios
+  // 8. OPTIMIZACIÓN: Intersection Observer para Footer
+  const { ref: footerRef, inView: footerInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+    rootMargin: "100px 0px",
+  });
+
+  // 9. OPTIMIZACIÓN: Handlers memoizados
   const handleOpen = useCallback(() => {
     setOpen(true);
   }, []);
@@ -189,97 +103,95 @@ export default function Home() {
     window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer");
   }, []);
 
-  // Effect optimizado
+  // 10. OPTIMIZACIÓN: Effect optimizado
   useEffect(() => {
     if (open) {
       showState(true);
     }
   }, [open, showState]);
 
-  // Memoizar datos estáticos
-  const pageData = useMemo(
-    () => ({
-      title: "Licores y bebidas vodka gin rom Crazy",
-      description:
-        "Licores bebidas Crazy - Los mejores precios en bebidas alcohólicas",
-      mainTitle: "Crazy Licores",
-      subTitle: "Temporada Invierno",
-      contactText: `Hacé tu pedido: ${CONTACT_PHONE}`,
-    }),
-    []
-  );
-
   return (
-    <ShopLayout title={pageData.title} description={pageData.description}>
-      <MainContainer>
-        <ContentContainer>
-          <HeaderContainer>
-            <MainTitle variant="h1" as="h1">
-              {pageData.mainTitle}
-            </MainTitle>
-            <SubTitle variant="h2" as="h2">
-              {pageData.subTitle}
-            </SubTitle>
-          </HeaderContainer>
+    <ShopLayout title={PAGE_DATA.title} description={PAGE_DATA.description}>
+      {/* Main Container */}
+      <div className="flex flex-col min-h-screen">
+        {/* Content Container */}
+        <main className="flex-1 flex flex-col items-center justify-start pb-12">
+          {/* Header Section */}
+          <header className="flex flex-col justify-center items-center mb-6 text-center px-4">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-tight gradient-text mb-2">
+              {PAGE_DATA.mainTitle}
+            </h1>
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-600 mb-4">
+              {PAGE_DATA.subTitle}
+            </h2>
+          </header>
 
-          <ContactContainer container justifyContent="center">
-            <Grid item xs={12} sm={10} md={8}>
-              <WhatsAppContainer onClick={handleWhatsAppClick}>
-                <WhatsAppIcon fontSize="large" color="success" />
-                <Typography
-                  variant="h6"
-                  sx={{ ml: 1, textAlign: "center", fontWeight: 600 }}
-                >
-                  {pageData.contactText}
-                </Typography>
-              </WhatsAppContainer>
-            </Grid>
-          </ContactContainer>
+          {/* WhatsApp Contact Section */}
+          <div className="w-full max-w-2xl mb-6 px-4">
+            <div className="w-full max-w-md mx-auto">
+              <div
+                className="btn-whatsapp group"
+                onClick={handleWhatsAppClick}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    handleWhatsAppClick();
+                  }
+                }}
+                aria-label={`Contactar por WhatsApp: ${PAGE_DATA.contactText}`}
+              >
+                <FaWhatsapp className="text-3xl text-success-600 mr-3 group-hover:scale-110 transition-transform duration-300" />
+                <span className="text-lg font-semibold text-gray-800 group-hover:text-success-700 text-center">
+                  {PAGE_DATA.contactText}
+                </span>
+              </div>
+            </div>
+          </div>
 
-          <OfferButtonContainer>
-            <OfferButton
-              variant="contained"
+          {/* Offer Button Section */}
+          <div className="relative w-full max-w-md mb-8 px-4">
+            <button
+              className="btn-primary w-full flex items-center justify-center gap-3 shadow-lg hover:shadow-xl active:transform active:translate-y-0 active:scale-95"
               onClick={handleOpen}
-              color="info"
-              startIcon={<VisibilityIcon />}
               aria-label="Ver oferta especial"
             >
+              <FaEye className="text-xl" />
               Ver Oferta
-            </OfferButton>
+            </button>
+
             {!hasBeenSeen && (
-              <Badge
-                badgeContent="1"
-                color="error"
-                sx={{
-                  position: "absolute",
-                  top: 15,
-                  right: 3,
-                  zIndex: 999,
-                }}
+              <div
+                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold animate-pulse z-10"
                 aria-label="Nueva oferta disponible"
-              />
+              >
+                1
+              </div>
             )}
-          </OfferButtonContainer>
+          </div>
 
+          {/* Products Section - Cargado dinámicamente */}
           <Products />
-        </ContentContainer>
+        </main>
 
-        <Footer />
-      </MainContainer>
+        {/* Footer with Intersection Observer */}
+        <div ref={footerRef}>{footerInView && <Footer />}</div>
+      </div>
 
-      {/* Botón para volver arriba */}
-      <Zoom in={showScrollTop}>
-        <ScrollTopFab
-          color="primary"
-          size="medium"
-          aria-label="Volver arriba"
-          onClick={scrollToTop}
-        >
-          <KeyboardArrowUpIcon />
-        </ScrollTopFab>
-      </Zoom>
+      {/* Scroll to Top Button */}
+      <button
+        className={`fixed bottom-20 right-8 w-14 h-14 bg-primary-600 hover:bg-primary-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50 flex items-center justify-center ${
+          showScrollTop
+            ? "opacity-100 translate-y-0 scale-100"
+            : "opacity-0 translate-y-4 scale-90 pointer-events-none"
+        } hover:scale-110 active:scale-95`}
+        onClick={scrollToTop}
+        aria-label="Volver arriba"
+      > 
+        <FaChevronUp className="text-xl" />
+      </button>
 
-      {/* Modal de oferta */}
+      {/* Modal de oferta - solo se carga cuando se necesita */}
       <OfferModal open={open} handleClose={handleClose} />
     </ShopLayout>
   );

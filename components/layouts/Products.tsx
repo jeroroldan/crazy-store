@@ -1,20 +1,17 @@
 import products from "@/data/products";
-import { Box, Grid, Container } from "@mui/material";
 import ProductList from "./ProductList";
 
 export const Products = () => {
   return (
-    <Container maxWidth="xl" sx={{ py: 4 }}>
-      <Grid container spacing={3} justifyContent="center">
+    <div className="max-w-screen-xl mx-auto py-8 px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
-            <Box sx={{ height: "100%" }}>
-              <ProductList product={product} />
-            </Box>
-          </Grid>
+          <div key={product.id} className="h-full">
+            <ProductList product={product} />
+          </div>
         ))}
-      </Grid>
-    </Container>
+      </div>
+    </div>
   );
 };
 

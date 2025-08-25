@@ -1,24 +1,11 @@
 import React, { FC, useContext, useState } from "react";
 import Image from "next/image";
-import {
-  Box,
-  Typography,
-  Button,
-  Card,
-  CardContent,
-  CardActions,
-  Tooltip,
-  Collapse,
-  IconButton,
-  Divider,
-} from "@mui/material";
-import { CrazyProduct } from "@/models";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ArrowForward } from "@mui/icons-material";
-import WhatsappIcon from "@mui/icons-material/WhatsApp.js";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore.js";
+import { CrazyProduct } from "@/models";
 import { OfferContext } from "@/context/offerContext";
+import { FaArrowRight, FaWhatsapp, FaChevronDown } from "react-icons/fa";
+import { twMerge } from "tailwind-merge";
 
 interface Props {
   product: CrazyProduct;
@@ -30,274 +17,115 @@ const ProductDetail: FC<Props> = ({ product }) => {
   const { asPath } = useRouter();
   const [expanded, setExpanded] = useState(false);
 
-  const handleChangeState = () => {
-    showState(true);
-  };
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+  const handleWhatsAppClick = () => {
+    showState(true);
+  };
+
+  const formatPrice = price.toLocaleString("es-AR", {
+    style: "currency",
+    currency: "ARS",
+  });
+
   return (
-    <Card
-      elevation={2}
-      sx={{
-        display: "flex",
-        marginBottom: 3,
-        marginTop: 2,
-        flexDirection: "column",
-        height: "100%",
-        borderRadius: 3,
-        overflow: "hidden",
-        backgroundColor: "#ffffff",
-        position: "relative",
-        transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
-        "&:hover": {
-          transform: "translateY(-8px)",
-          boxShadow: "0 15px 30px rgba(0,0,0,0.1), 0 8px 12px rgba(0,0,0,0.08)",
-        },
-      }}
-    >
-      {/* Badge mejorado para productos destacados */}
+    <article className="bg-white rounded-2xl shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl overflow-hidden flex flex-col h-full relative group">
+      {/* Badge destacado para producto más vendido */}
       {id === 3 && (
-        <Box
-          sx={{
-            position: "absolute",
-            top: 15,
-            right: 15,
-            width: 90,
-            height: 90,
-            borderRadius: "50%",
-            background: "linear-gradient(135deg, #ff3d00 0%, #ff8a65 100%)",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            color: "white",
-            fontWeight: "bold",
-            zIndex: 10,
-            boxShadow: "0 4px 12px rgba(255, 61, 0, 0.4)",
-            transform: "rotate(8deg)",
-            animation: "pulse 2s infinite",
-            "@keyframes pulse": {
-              "0%": { boxShadow: "0 0 0 0 rgba(255, 61, 0, 0.4)" },
-              "70%": { boxShadow: "0 0 0 10px rgba(255, 61, 0, 0)" },
-              "100%": { boxShadow: "0 0 0 0 rgba(255, 61, 0, 0)" },
-            },
-          }}
-        >
-          <Typography variant="caption" sx={{ fontSize: "0.7rem", mb: -0.5 }}>
-            MÁS
-          </Typography>
-          <Typography variant="subtitle2" sx={{ fontWeight: 800 }}>
-            VENDIDO
-          </Typography>
-          <Typography variant="caption" sx={{ fontSize: "0.65rem", mt: -0.5 }}>
+        <div className="absolute top-4 right-4 w-[90px] h-[90px] rounded-full bg-gradient-to-br from-red-600 to-orange-400 text-white text-center flex flex-col items-center justify-center font-bold z-10 shadow-lg rotate-2 animate-pulse-custom">
+          <span className="text-[0.7rem] -mb-1 leading-none">MÁS</span>
+          <span className="text-sm font-extrabold leading-none">VENDIDO</span>
+          <span className="text-[0.65rem] -mt-1 leading-none">
             #1 EN VENTAS
-          </Typography>
-        </Box>
+          </span>
+        </div>
       )}
 
-      {/* Contenedor de imagen mejorado */}
-      <Box
-        sx={{
-          position: "relative",
-          width: "100%",
-          paddingTop: "75%",
-          backgroundColor: "#f9f9f9",
-          overflow: "hidden",
-          "&::before": {
-            content: '""',
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background:
-              "radial-gradient(circle, rgba(255,255,255,0) 70%, rgba(0,0,0,0.05) 100%)",
-            zIndex: 1,
-          },
-        }}
-      >
+      {/* Contenedor de imagen */}
+      <div className="relative w-full pt-[75%] bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+        <div className="absolute inset-0 bg-radial-gradient opacity-20"></div>
         <Image
           src={url}
           alt={title}
           fill
-          style={{ objectFit: "contain" }}
+          className="object-contain transition-transform duration-300 group-hover:scale-105"
           loading="lazy"
           sizes="(max-width: 568px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-      </Box>
+      </div>
 
-      <CardContent sx={{ flexGrow: 1, padding: 3, pb: 1 }}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-            mb: 1.5,
-          }}
-        >
-          <Typography
-            variant="h6"
-            component="h2"
-            sx={{
-              color: "#2c3e50",
-              fontWeight: "700",
-              lineHeight: 1.3,
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              display: "-webkit-box",
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: "vertical",
-              mr: 1.5,
-              flex: 1,
-            }}
-          >
+      {/* Contenido principal */}
+      <div className="flex flex-col flex-grow px-6 pt-5 pb-2">
+        {/* Título y precio */}
+        <div className="flex justify-between items-start mb-4 gap-4">
+          <h2 className="text-lg font-bold text-gray-800 leading-snug line-clamp-2 flex-1 hover:text-primary-700 transition-colors duration-200">
             {title}
-          </Typography>
-          <Box
-            sx={{
-              borderRadius: 2,
-              background:
-                "linear-gradient(90deg, rgba(25,118,210,0.08) 0%, rgba(25,118,210,0.16) 100%)",
-              padding: "8px 12px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              boxShadow: "0 2px 8px rgba(25,118,210,0.1)",
-            }}
-          >
-            <Typography
-              variant="h6"
-              sx={{
-                color: "#1976d2",
-                fontWeight: "bold",
-                whiteSpace: "nowrap",
-              }}
-            >
-              {price.toLocaleString("es-AR", {
-                style: "currency",
-                currency: "ARS",
-              })}
-            </Typography>
-          </Box>
-        </Box>
+          </h2>
+          <div className="bg-gradient-to-r from-primary-50 to-primary-100 border border-primary-200 text-primary-700 font-bold px-3 py-1.5 rounded-lg shadow-sm text-sm whitespace-nowrap">
+            {formatPrice}
+          </div>
+        </div>
 
-        <Typography
-          variant="body2"
-          sx={{
-            color: "#546e7a",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
-            mt: 1,
-            lineHeight: 1.5,
-          }}
-        >
+        {/* Descripción */}
+        <p className="text-gray-600 text-sm line-clamp-2 leading-relaxed mb-3">
           {description}
-        </Typography>
+        </p>
 
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            mt: 2,
-          }}
-        >
-          <IconButton
+        {/* Botón expandir/contraer */}
+        <div className="flex justify-center mt-auto">
+          <button
             onClick={handleExpandClick}
             aria-expanded={expanded}
-            aria-label="mostrar más"
-            sx={{
-              transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
-              transition: "transform 0.3s",
-              color: "#9e9e9e",
-              "&:hover": {
-                color: "#1976d2",
-                backgroundColor: "rgba(25, 118, 210, 0.04)",
-              },
-            }}
+            aria-label={expanded ? "Mostrar menos" : "Mostrar más"}
+            className={twMerge(
+              "p-2 rounded-full transition-all duration-300 text-gray-400 hover:text-primary-600 hover:bg-primary-50",
+              expanded ? "rotate-180" : "rotate-0"
+            )}
           >
-            <ExpandMoreIcon />
-          </IconButton>
-        </Box>
-      </CardContent>
+            <FaChevronDown className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
 
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <Divider sx={{ mx: 3, opacity: 0.6 }} />
-        <CardContent sx={{ px: 3, py: 2 }}>
-          <Typography
-            paragraph
-            sx={{
-              color: "#546e7a",
-              lineHeight: 1.6,
-              fontSize: "0.9rem",
-            }}
-          >
-            {description}
-          </Typography>
-        </CardContent>
-      </Collapse>
+      {/* Contenido expandible */}
+      <div
+        className={twMerge(
+          "transition-all duration-300 overflow-hidden",
+          expanded ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+        )}
+      >
+        <div className="border-t border-gray-200 px-6 py-4">
+          <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
+        </div>
+      </div>
 
-      <Divider sx={{ mx: 3, opacity: 0.6 }} />
+      {/* Separador */}
+      <div className="border-t border-gray-200 mx-6 opacity-60" />
 
-      <CardActions sx={{ justifyContent: "center", padding: 2.5 }}>
+      {/* Botones de acción */}
+      <div className="flex justify-center py-6">
         {asPath === "/" ? (
-          <Link href={`/${product.id}`} passHref legacyBehavior>
-            <Tooltip title="Ver detalles del producto">
-              <Button
-                variant="outlined"
-                startIcon={<ArrowForward />}
-                size="medium"
-                sx={{
-                  borderColor: "#1976d2",
-                  color: "#1976d2",
-                  borderRadius: 2,
-                  borderWidth: 1.5,
-                  textTransform: "none",
-                  fontWeight: 600,
-                  px: 3,
-                  "&:hover": {
-                    backgroundColor: "#1976d2",
-                    color: "#FFFFFF",
-                    borderColor: "#1976d2",
-                    boxShadow: "0 4px 12px rgba(25, 118, 210, 0.3)",
-                  },
-                }}
-              >
-                Ver detalle
-              </Button>
-            </Tooltip>
+          <Link
+            href={`/${product.id}`}
+            className="group/btn flex items-center gap-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+          >
+            <FaArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+            Ver detalle
           </Link>
         ) : (
-          <Button
-            variant="contained"
-            startIcon={<WhatsappIcon />}
-            size="medium"
-            // onClick={handleChangeState}
-            sx={{
-              backgroundColor: "#1976d2",
-              borderRadius: 2,
-              boxShadow: "0 4px 12px rgba(25, 118, 210, 0.3)",
-              textTransform: "none",
-              fontWeight: 600,
-              px: 3,
-              py: 1,
-              "&:hover": {
-                backgroundColor: "#1565c0",
-                boxShadow: "0 6px 15px rgba(25, 118, 210, 0.4)",
-              },
-            }}
+          <button
+            onClick={handleWhatsAppClick}
+            className="group/btn flex items-center gap-3 bg-success-600 hover:bg-success-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
           >
+            <FaWhatsapp className="w-4 h-4 transition-transform duration-300 group-hover/btn:scale-110" />
             Hacer pedido por WhatsApp
-          </Button>
+          </button>
         )}
-      </CardActions>
-    </Card>
+      </div>
+    </article>
   );
 };
 
-export default ProductDetail;
+export default React.memo(ProductDetail);
