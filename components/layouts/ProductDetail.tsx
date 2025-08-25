@@ -84,7 +84,8 @@ const ProductDetail: FC<Props> = ({ product }) => {
               expanded ? "rotate-180" : "rotate-0"
             )}
           >
-            <FaChevronDown className="w-4 h-4" />
+            {/* Usa React.createElement para evitar errores de tipos */}
+            {React.createElement(FaChevronDown, { className: "w-4 h-4" })}
           </button>
         </div>
       </div>
@@ -111,7 +112,10 @@ const ProductDetail: FC<Props> = ({ product }) => {
             href={`/${product.id}`}
             className="group/btn flex items-center gap-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
           >
-            <FaArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+            {React.createElement(FaArrowRight, {
+              className:
+                "w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1",
+            })}
             Ver detalle
           </Link>
         ) : (
@@ -119,7 +123,10 @@ const ProductDetail: FC<Props> = ({ product }) => {
             onClick={handleWhatsAppClick}
             className="group/btn flex items-center gap-3 bg-success-600 hover:bg-success-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
           >
-            <FaWhatsapp className="w-4 h-4 transition-transform duration-300 group-hover/btn:scale-110" />
+            {React.createElement(FaWhatsapp, {
+              className:
+                "w-4 h-4 transition-transform duration-300 group-hover/btn:scale-110",
+            })}
             Hacer pedido por WhatsApp
           </button>
         )}

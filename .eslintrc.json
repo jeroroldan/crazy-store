@@ -1,10 +1,4 @@
 {
-  "extends": ["next/core-web-vitals", "prettier"],
-  "plugins": ["prettier"],
-  "rules": {
-    "prettier/prettier": "error"
-  },
-  "commands": {
-    "migrate": "npx @next/codemod@latest built-in-next-font ."
-  }
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "rules": {}
 }
