@@ -73,7 +73,7 @@ const PAGE_DATA = {
   description:
     "Licores bebidas Crazy - Los mejores precios en bebidas alcohólicas",
   mainTitle: "Crazy Licores",
-  subTitle: "Temporada Invierno",
+  subTitle: "Temporada Verano",
   contactText: `Hacé tu pedido: ${CONTACT_PHONE}`,
 };
 
