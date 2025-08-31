@@ -4,10 +4,8 @@ import ProductDetail from "@/components/layouts/ProductDetail";
 import { ShopLayout } from "@/components/layouts";
 import products from "@/data/products";
 import Link from "next/link";
-// Cambia la importación de íconos
 import { FaArrowLeft, FaCheck } from "react-icons/fa";
 
-// Lista de beneficios como constante fuera del componente para evitar recrearla
 const PRODUCT_BENEFITS = [
   "Mejor precio del mercado",
   "Alto margen de ganancia",

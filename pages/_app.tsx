@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app";
 import { OfferProvider } from "../context/offerContext";
 
-import "../styles/globals.css";
+import '../styles/globals.css'
 
 
 
