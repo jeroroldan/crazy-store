@@ -92,7 +92,7 @@ const PAGE_DATA = Object.freeze({
   title: "Licores y bebidas vodka gin rom Crazy",
   description:
     "Licores bebidas Crazy - Los mejores precios en bebidas alcohólicas",
-  mainTitle: "Crazy Licores",
+  mainTitle: "Hace tú pedido",
   subTitle: "Temporada Verano",
   contactText: `Hacé tu pedido: ${CONTACT_PHONE}`,
 });

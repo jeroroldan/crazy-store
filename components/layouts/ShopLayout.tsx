@@ -20,7 +20,7 @@ export const ShopLayout = ({ children, title, description }: Props) => {
         {/* Header/AppBar convertido a Tailwind */}
         <header className="bg-primary-600 shadow-lg">
           <div className="max-w-7xl mx-auto px-4 py-4">
-            <h1 className="text-white text-xl font-bold">Crazy Licores</h1>
+            <h1 className="text-white   text-4xl text-center font-bold">Crazy Licores</h1>
           </div>
         </header>
 
