@@ -88,7 +88,9 @@ const PageDetailProduct = () => {
   return (
     <ShopLayout
       title={`${product.title} - Licores Crazy`}
-      description={`Detalles del producto: ${product.title}`}
+      description={product.description}
+      ogImage={`https://crazy-store.vercel.app${product.url}`}
+      ogUrl={`https://crazy-store.vercel.app${router.asPath}`}
     >
       {/* Contenedor principal */}
       <div className="max-w-7xl mx-auto px-4 py-6">
