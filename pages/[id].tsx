@@ -62,7 +62,7 @@ const PageDetailProduct = () => {
   // Estado de producto no encontrado
   if (!product) {
     return (
-      <ShopLayout title="Producto no encontrado" description="Licores Crazy">
+      <ShopLayout title="Producto no encontrado" description="Licores Crazy" ogUrl={`https://crazy-liquors.com${router.asPath}`}>
         <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
           <div className="max-w-md">
             <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">

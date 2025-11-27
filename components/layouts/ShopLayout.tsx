@@ -5,15 +5,23 @@ interface Props {
   title: string;
   description: string;
   children: ReactNode;
+  ogImage?: string;
+  ogUrl?: string;
 }
 
-export const ShopLayout = ({ children, title, description }: Props) => {
+export const ShopLayout = ({ children, title, description, ogImage, ogUrl }: Props) => {
   return (
     <>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content="website" />
+        {ogImage && <meta property="og:image" content={ogImage} />}
+        {ogUrl && <meta property="og:url" content={ogUrl} />}
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
