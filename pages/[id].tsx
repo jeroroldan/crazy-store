@@ -4,7 +4,6 @@ import ProductDetail from "@/components/layouts/ProductDetail";
 import { ShopLayout } from "@/components/layouts";
 import products from "@/data/products";
 import Link from "next/link";
-import { FaArrowLeft, FaCheck } from "react-icons/fa";
 
 const PRODUCT_BENEFITS = [
   "Mejor precio del mercado",
@@ -15,6 +14,27 @@ const PRODUCT_BENEFITS = [
   "Alta rotación",
   "Producto en temporada",
 ];
+
+// Componentes de íconos SVG personalizados
+const CheckIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 20 20">
+    <path
+      fillRule="evenodd"
+      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+      clipRule="evenodd"
+    />
+  </svg>
+);
+
+const ArrowLeftIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 20 20">
+    <path
+      fillRule="evenodd"
+      d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+      clipRule="evenodd"
+    />
+  </svg>
+);
 
 // Componente extraído para los beneficios
 const ProductBenefits = React.memo(() => (
@@ -35,10 +55,7 @@ const ProductBenefits = React.memo(() => (
           className="flex items-center py-2 px-3 rounded-lg transition-all duration-200 hover:bg-primary-50 hover:transform hover:translate-x-1"
         >
           <div className="flex-shrink-0 w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center mr-3">
-            {/* Usa React.createElement para evitar el error de tipos */}
-            {React.createElement(FaCheck, {
-              className: "text-primary-700 text-sm",
-            })}
+            <CheckIcon className="text-primary-700 w-4 h-4" />
           </div>
           <span className="font-medium text-gray-700 text-sm leading-relaxed">
             {text}
@@ -52,7 +69,9 @@ const ProductBenefits = React.memo(() => (
 ProductBenefits.displayName = "ProductBenefits";
 
 const PageDetailProduct = () => {
-  const { query } = useRouter();
+  const router = useRouter(); // ✅ Declarar router
+  const { query } = router;
+
   const valueId = useMemo(() => parseInt(query.id as string) || 0, [query.id]);
   const product = useMemo(
     () => products.find((p) => p.id === valueId),
@@ -62,7 +81,11 @@ const PageDetailProduct = () => {
   // Estado de producto no encontrado
   if (!product) {
     return (
-      <ShopLayout title="Producto no encontrado" description="Licores Crazy" ogUrl={`https://crazy-liquors.com${router.asPath}`}>
+      <ShopLayout
+        title="Producto no encontrado"
+        description="Licores Crazy"
+        ogUrl={`https://crazy-liquors.com${router.asPath}`}
+      >
         <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
           <div className="max-w-md">
             <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
@@ -75,8 +98,7 @@ const PageDetailProduct = () => {
               href="/"
               className="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
             >
-              {/* Usa React.createElement para evitar el error de tipos */}
-              {React.createElement(FaArrowLeft, { className: "text-sm" })}
+              <ArrowLeftIcon className="w-4 h-4" />
               Volver a productos
             </Link>
           </div>
@@ -101,8 +123,7 @@ const PageDetailProduct = () => {
             replace
             className="inline-flex items-center gap-2 bg-success-600 hover:bg-success-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg min-w-[200px] justify-center"
           >
-            {/* Usa React.createElement para evitar el error de tipos */}
-            {React.createElement(FaArrowLeft, { className: "text-sm" })}
+            <ArrowLeftIcon className="w-4 h-4" />
             Volver
           </Link>
         </div>
