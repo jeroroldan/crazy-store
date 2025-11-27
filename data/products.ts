@@ -7,7 +7,7 @@ export const products: CrazyProduct[] = [
     type: "Gin - Bebida blanca",
     title: "Gin Crazy x1L.",
     price: 3900,
-    description: "Gin de Calidad superior caja x 6 uni.",
+    description: "Gin de Calidad superior caja x 6 uni. El mejor precio del mercado.",
     url: "/gin.jpg",
   },
   {
