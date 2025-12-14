@@ -19,10 +19,10 @@ const ExclamationTriangleIcon = ({ className }: { className?: string }) => (
 
 export default function Footer() {
   return (
-    <footer className="w-full flex-shrink-0 bg-primary-400 mt-auto z-10">
-      <div className="flex flex-col sm:flex-row items-center justify-center bg-primary-400 py-4 px-4 gap-2 sm:gap-3 rounded-t-md shadow-md text-center">
-        <ExclamationTriangleIcon className="text-white w-6 h-6 flex-shrink-0" />
-        <h6 className="text-white text-sm sm:text-base font-medium mb-10 tracking-wide leading-snug">
+    <footer className="w-full flex-shrink-0 bg-primary-900 mt-auto z-10">
+      <div className="flex flex-col sm:flex-row items-center justify-center bg-primary-900 py-4 px-4 gap-2 sm:gap-3 rounded-t-xl shadow-inner text-center">
+        <ExclamationTriangleIcon className="text-yellow-400 w-6 h-6 flex-shrink-0" />
+        <h6 className="text-white text-sm sm:text-base font-medium mb-0 tracking-wide leading-snug">
           PROHIBIDA LA VENTA A MENORES DE 18 AÑOS
         </h6>
       </div>

@@ -224,7 +224,7 @@ const ProductDetail: FC<Props> = ({ product }) => {
         ) : (
           <button
             onClick={handleWhatsAppClick}
-            className="group/btn w-full flex items-center justify-center gap-3 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold px-6 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            className="group/btn w-full flex items-center justify-center gap-3 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold px-6 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 focus-visible:ring-emerald-500"
           >
             <WhatsAppIcon className="w-5 h-5 transition-transform duration-300 group-hover/btn:scale-110" />
             Pedir por WhatsApp

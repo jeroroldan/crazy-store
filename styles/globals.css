@@ -9,7 +9,13 @@
 
   body {
     margin: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--font-outfit), sans-serif;
+    @apply text-gray-800 bg-gray-50;
+  }
+
+  /* Improved focus visibility for accessibility */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
   }
 }
 

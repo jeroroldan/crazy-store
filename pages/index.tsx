@@ -186,11 +186,10 @@ type ScrollTopButtonProps = {
 
 const ScrollTopButton = memo(({ showScrollTop, onClick }: ScrollTopButtonProps) => (
   <button
-    className={`fixed bottom-20 right-8 w-14 h-14 bg-primary-600 hover:bg-primary-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50 flex items-center justify-center ${
-      showScrollTop
+    className={`fixed bottom-20 right-8 w-14 h-14 bg-primary-600 hover:bg-primary-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50 flex items-center justify-center ${showScrollTop
         ? "opacity-100 translate-y-0 scale-100"
         : "opacity-0 translate-y-4 scale-90 pointer-events-none"
-    } hover:scale-110 active:scale-95`}
+      } hover:scale-110 active:scale-95`}
     onClick={onClick}
     aria-label="Volver arriba"
     style={{ willChange: showScrollTop ? "transform, opacity" : "auto" }}
@@ -265,7 +264,7 @@ export default function Home() {
       {/* Main Container */}
       <div className="flex flex-col min-h-screen">
         {/* Content Container */}
-        <main className="flex-1 flex flex-col items-center justify-start pb-12">
+        <section className="flex-1 flex flex-col items-center justify-start pb-12">
           {/* Header Section */}
           <Header
             mainTitle={PAGE_DATA.mainTitle}
@@ -285,7 +284,7 @@ export default function Home() {
 
           {/* Products Section - Cargado dinámicamente */}
           <Products />
-        </main>
+        </section>
 
         {/* Footer with Intersection Observer */}
         <div ref={footerRef}>{footerInView && <Footer />}</div>
