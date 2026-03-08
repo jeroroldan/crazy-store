@@ -93,7 +93,7 @@ const PAGE_DATA = Object.freeze({
   description:
     "Licores bebidas Crazy - Los mejores precios en bebidas alcohólicas",
   mainTitle: "Hace tú pedido",
-  subTitle: "Temporada Verano",
+  subTitle: "Temporada Invierno",
   contactText: `Hacé tu pedido: ${CONTACT_PHONE}`,
 });
 
