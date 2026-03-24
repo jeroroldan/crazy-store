@@ -3,6 +3,22 @@ import { CrazyProduct } from '@/models'
 
 export const products: CrazyProduct[] = [
   {
+    id: 1,
+    type: "Bebida energizante SPEED",
+    title: "SPEED x473",
+    price: 24500,
+    description: "Bebida energizante SPEED caja x 12 uni.",
+    url: "/speed.jpg",
+  },
+  {
+    id: 2,
+    type: "Petakas - Bebida cremosa",
+    title: "Petakas  Cremosas",
+    price: 1480,
+    description: "Infaltables en tu negocio",
+    url: "/petakasPesadas.jpg",
+  },
+  {
     id: 3,
     type: "Gin - Bebida blanca",
     title: "Gin Crazy x1L.",
@@ -11,7 +27,7 @@ export const products: CrazyProduct[] = [
     url: "/gin.jpg",
   },
   {
-    id: 0,
+    id: 4,
     type: "Vodka - Bebida blanca",
     title: "Vodka Crazy x1L.",
     description: "Vodka de Calidad superior caja x 6 uni.",
@@ -19,7 +35,7 @@ export const products: CrazyProduct[] = [
     url: "/vodka.png",
   },
   {
-    id: 1,
+    id: 5,
     type: "Rom - Bebida blanca",
     title: "Rom Crazy x1L.",
     price: 4400,
@@ -27,7 +43,7 @@ export const products: CrazyProduct[] = [
     url: "/rom-crazy.png",
   },
   {
-    id: 2,
+    id: 6,
     type: "Tekila - Bebida blanca",
     title: "Tekila Crazy x1L.",
     price: 4400,
@@ -35,7 +51,7 @@ export const products: CrazyProduct[] = [
     url: "/tekilaCrazy.png",
   },
   {
-    id: 4,
+    id: 7,
     type: "Cocktails",
     title: "Frut., Ana.,Dur. x750.",
     price: 3300,
@@ -43,7 +59,7 @@ export const products: CrazyProduct[] = [
     url: "/cocktail.jpg",
   },
   {
-    id: 5,
+    id: 8,
     type: "Licores ",
     title: "Licores x1L.",
     price: 4400,
@@ -51,7 +67,7 @@ export const products: CrazyProduct[] = [
     url: "/licores.jpg",
   },
   {
-    id: 6,
+    id: 9,
     type: "Licores ",
     title: "Piña Colada x1L.",
     price: 5100,
@@ -59,7 +75,7 @@ export const products: CrazyProduct[] = [
     url: "/pinacolada.PNG",
   },
   {
-    id: 7,
+    id: 10,
     type: "Licores ",
     title: "Granadina",
     price: 4400,
@@ -67,20 +83,12 @@ export const products: CrazyProduct[] = [
     url: "/licores.jpg",
   },
   {
-    id: 8,
+    id: 11,
     type: "Petakas - Bebida blanca",
     title: "Petakas Crazy",
     price: 1310,
     description: "Infaltables en tu negocio",
     url: "/petakaBlanca.jpg",
-  },
-  {
-    id: 9,
-    type: "Petakas - Bebida cremosa",
-    title: "Petakas  Cremosas",
-    price: 1480,
-    description: "Infaltables en tu negocio",
-    url: "/petakasPesadas.jpg",
   },
 ];
 
