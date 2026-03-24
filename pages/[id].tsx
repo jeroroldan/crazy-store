@@ -128,9 +128,8 @@ const PageDetailProduct = () => {
           </Link>
         </div>
 
-        {/* Detalle del producto */}
         <div className="mb-8">
-          <ProductDetail product={product} />
+          <ProductDetail product={product} priority={true} />
         </div>
 
         {/* Sección de beneficios */}

@@ -5,9 +5,9 @@ export const Products = () => {
   return (
     <div className="max-w-screen-xl mx-auto py-8 px-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.map((product) => (
+        {products.map((product, index) => (
           <div key={product.id} className="h-full">
-            <ProductList product={product} />
+            <ProductList product={product} priority={index === 0} />
           </div>
         ))}
       </div>

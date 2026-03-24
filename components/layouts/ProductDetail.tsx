@@ -8,6 +8,7 @@ import { twMerge } from "tailwind-merge";
 
 interface Props {
   product: CrazyProduct;
+  priority?: boolean;
 }
 
 // Componentes de íconos optimizados
@@ -43,7 +44,7 @@ const StarIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const ProductDetail: FC<Props> = ({ product }) => {
+const ProductDetail: FC<Props> = ({ product, priority = false }) => {
   const { showState } = useContext(OfferContext);
   const { description, id, title, url, price } = product;
   const { asPath } = useRouter();
@@ -110,7 +111,8 @@ const ProductDetail: FC<Props> = ({ product }) => {
             "object-contain transition-all duration-700 group-hover:scale-110 group-hover:rotate-1",
             imageLoaded ? "opacity-100" : "opacity-0"
           )}
-          loading="lazy"
+          priority={priority}
+          loading={priority ? undefined : "lazy"}
           sizes="(max-width: 568px) 100vw, (max-width: 1200px) 50vw, 33vw"
           onLoad={() => setImageLoaded(true)}
         />

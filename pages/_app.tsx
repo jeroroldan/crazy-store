@@ -1,10 +1,10 @@
 import type { AppProps } from "next/app";
 import { OfferProvider } from "../context/offerContext";
-import { Outfit } from "next/font/google";
+import { Roboto } from 'next/font/google'
 
 import '../styles/globals.css'
 
-const outfit = Outfit({
+const outfit = Roboto({
   subsets: ["latin"],
   variable: "--font-outfit",
   weight: ["300", "400", "500", "600", "700", "800"],
