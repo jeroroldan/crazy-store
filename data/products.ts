@@ -6,7 +6,7 @@ export const products: CrazyProduct[] = [
     id: 1,
     type: "Bebida energizante SPEED",
     title: "SPEED x473",
-    price: 24500,
+    price: 27550,
     description: "Bebida energizante SPEED caja x 12 uni.",
     url: "/speed473.avif",
   },
